@@ -1,0 +1,4 @@
+README file for the J-Tee's
+CSE216 POS System
+
+DataBaseConnection class: constructs a connection to our database and implements methods to access said DB, including a close() method to close the connection
