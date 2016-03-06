@@ -93,6 +93,7 @@ public class DataBaseConnection {
 
     public ArrayList<ArrayList<String>> newQuery(String q, int count){
 	ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
+	table = null;
 	try{
 	    Statement s = con.createStatement();
 	    ResultSet r = s.executeQuery(q);
@@ -153,7 +154,6 @@ public class DataBaseConnection {
 	    else{
 		return false;
 	    }
-
 	}
 	catch(SQLException ex){
 	    System.out.println("error in verifyMatch");
