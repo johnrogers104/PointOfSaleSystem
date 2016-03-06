@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Jane
- */
+
+// Class to hold info for a product in the cart
 public class SalesLineItem {
     
     //variables
