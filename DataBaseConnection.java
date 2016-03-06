@@ -119,22 +119,46 @@ public class DataBaseConnection {
     }
 
     public boolean isInDataBase(String str, String tableName){
-	Statement s = con.createStatement();
-	ResultSet r = s.executeQuery("select * from "+tableName);
-	ResultSetMetaData rsmd = r.getMetaData();
-	String primaryKey = rsmd.getColumnName(1);
-	String query = "select * from "+tableName+" where "+primaryKey+" = '"+str+"'";
-	int c = rsmd.getColumnCount();
+	try{
+	    Statement s = con.createStatement();
+	    ResultSet r = s.executeQuery("select * from "+tableName);
+	    ResultSetMetaData rsmd = r.getMetaData();
+	    String primaryKey = rsmd.getColumnName(1);
+	    String query = "select * from "+tableName+" where "+primaryKey+" = '"+str+"'";
+	    int c = rsmd.getColumnCount();
 	
-	if(newQuery(query, c) != null){
-	    return true;
+	    if(newQuery(query, c) != null){
+		return true;
+	    }
+	    else{
+		return false;
+	    }
 	}
-	else{
+	catch(SQLException ex){
+	    System.out.println("error in isInDataBase");
 	    return false;
 	}
     }
 
-    public boolean verifyMatch(String user, String password, String columnName){
-	return true;
+    public boolean verifyMatch(String user, String password, String tableName, String columnName1, String columnName2){
+	try{
+	    Statement s = con.createStatement();
+	    ResultSet r = s.executeQuery("select * from "+tableName);
+	    ResultSetMetaData rsmd = r.getMetaData();
+	    int c = rsmd.getColumnCount();
+	    String query = "select * from "+tableName+" where "+columnName1+" = "+user+" and "+columnName2+" = "+password;
+	    if(newQuery(query, c) != null){
+		return true;
+	    }
+	    else{
+		return false;
+	    }
+
+	}
+	catch(SQLException ex){
+	    System.out.println("error in verifyMatch");
+	    return false;
+	}
+
     }
 }
