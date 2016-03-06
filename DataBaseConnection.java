@@ -93,7 +93,6 @@ public class DataBaseConnection {
 
     public ArrayList<ArrayList<String>> newQuery(String q, int count){
 	ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
-	table = null;
 	try{
 	    Statement s = con.createStatement();
 	    ResultSet r = s.executeQuery(q);
@@ -111,12 +110,8 @@ public class DataBaseConnection {
 	catch(SQLException ex){
 	    ex.printStackTrace();
 	}
-	finally{
-	    ArrayList<String> row = new ArrayList<String>();
-	    row.add("");
-            table.add(row);
-            return table;
-	}
+	table = null;
+	return table;
     }
 
     public boolean isInDataBase(String str, String tableName){
@@ -128,7 +123,7 @@ public class DataBaseConnection {
 	    String query = "select * from "+tableName+" where "+primaryKey+" = '"+str+"'";
 	    int c = rsmd.getColumnCount();
 	
-	    if(newQuery(query, c) != null){
+	    if(newQuery(query, c).isEmpty()){
 		return true;
 	    }
 	    else{
@@ -148,7 +143,7 @@ public class DataBaseConnection {
 	    ResultSetMetaData rsmd = r.getMetaData();
 	    int c = rsmd.getColumnCount();
 	    String query = "select * from "+tableName+" where "+columnName1+" = "+attribute1+" and "+columnName2+" = "+attribute2;
-	    if(newQuery(query, c) != null){
+	    if(newQuery(query, c).isEmpty()){
 		return true;
 	    }
 	    else{
@@ -159,6 +154,5 @@ public class DataBaseConnection {
 	    System.out.println("error in verifyMatch");
 	    return false;
 	}
-
     }
 }
