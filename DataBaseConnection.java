@@ -7,15 +7,15 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DataBaseConnection {
-    private Connection con;
-    
+    private static Connection con;
+    private static DataBaseConnection db = null;
     /*
       The DataBaseConnection constructor, which opens a connection to our database.
       Note that the connection MUST be closed by the close() method listed below after
       the DataBaseConnection object that this constructor creates is done being used.
      */
 
-    DataBaseConnection(){
+    private DataBaseConnection(){
 	try{
 	    Class.forName("oracle.jdbc.driver.OracleDriver");
 	    con = DriverManager.getConnection("jdbc:oracle:thin:@edgar1.cse.lehigh.edu:1521:cse241", "jeg416cse216", "jtees216");   
@@ -28,6 +28,21 @@ public class DataBaseConnection {
 	}
     }
     
+    /*
+      static method to return the single instance of DataBaseConnection to be used
+      by our system.  
+     */
+
+    public static DataBaseConnection getInstance(){
+	if(db == null){
+	    db = new DataBaseConnection();
+	    return db;
+	}
+	else{
+	    return db;
+	}
+    }
+
     /*
       The close() method is a simple method to close the connection
       to the database that was opened when we create a new 
@@ -102,4 +117,24 @@ public class DataBaseConnection {
             return table;
 	}
     }
-} 
+
+    public boolean isInDataBase(String str, String tableName){
+	Statement s = con.createStatement();
+	ResultSet r = s.executeQuery("select * from "+tableName);
+	ResultSetMetaData rsmd = r.getMetaData();
+	String primaryKey = rsmd.getColumnName(1);
+	String query = "select * from "+tableName+" where "+primaryKey+" = '"+str+"'";
+	int c = rsmd.getColumnCount();
+	
+	if(newQuery(query, c) != null){
+	    return true;
+	}
+	else{
+	    return false;
+	}
+    }
+
+    public boolean verifyMatch(String user, String password, String columnName){
+	return true;
+    }
+}
