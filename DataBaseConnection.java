@@ -140,13 +140,13 @@ public class DataBaseConnection {
 	}
     }
 
-    public boolean verifyMatch(String user, String password, String tableName, String columnName1, String columnName2){
+    public boolean verifyMatch(String attribute1, String attribute2, String tableName, String columnName1, String columnName2){
 	try{
 	    Statement s = con.createStatement();
 	    ResultSet r = s.executeQuery("select * from "+tableName);
 	    ResultSetMetaData rsmd = r.getMetaData();
 	    int c = rsmd.getColumnCount();
-	    String query = "select * from "+tableName+" where "+columnName1+" = "+user+" and "+columnName2+" = "+password;
+	    String query = "select * from "+tableName+" where "+columnName1+" = "+attribute1+" and "+columnName2+" = "+attribute2;
 	    if(newQuery(query, c) != null){
 		return true;
 	    }
