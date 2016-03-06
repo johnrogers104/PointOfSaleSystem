@@ -17,7 +17,7 @@ public class SalesLineItem {
     //constructor 
     //pass in the id/barcode of the current lineitem
     public void SalesLineItem(String barcode){
-        desc = new ProductDesciption(barcode);
+        desc = new ProductDescription(barcode);
         
     }
       
