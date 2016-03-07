@@ -123,7 +123,7 @@ public class DataBaseConnection {
 	    String query = "select * from "+tableName+" where "+primaryKey+" = '"+str+"'";
 	    int c = rsmd.getColumnCount();
 	
-	    if(newQuery(query, c).isEmpty()){
+	    if(!newQuery(query, c).isEmpty()){
 		return true;
 	    }
 	    else{
@@ -143,7 +143,7 @@ public class DataBaseConnection {
 	    ResultSetMetaData rsmd = r.getMetaData();
 	    int c = rsmd.getColumnCount();
 	    String query = "select * from "+tableName+" where "+columnName1+" = "+attribute1+" and "+columnName2+" = "+attribute2;
-	    if(newQuery(query, c).isEmpty()){
+	    if(!newQuery(query, c).isEmpty()){
 		return true;
 	    }
 	    else{
