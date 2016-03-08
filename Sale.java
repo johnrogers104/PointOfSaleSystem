@@ -30,8 +30,8 @@ public class Sale {
     }
     
     // Create a new item for the sale
-    public void makeItem(String barcode) {
-        cart.add(new SalesLineItem(barcode));
+    public void makeItem(String barcode, int qty) {
+        cart.add( new SalesLineItem(barcode, qty) );
     }
     
     // Make a payment for this sale. Only 1 per sale

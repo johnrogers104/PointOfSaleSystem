@@ -22,8 +22,8 @@ public class Register {
     }
     
     // Enter an item into the sale
-    public void enterItem(String barcode) {
-        currentSale.makeItem(barcode);
+    public void enterItem(String barcode, int quantity) {
+        currentSale.makeItem(barcode, quantity);
     }
     
     // Make a payment for the transaction and th

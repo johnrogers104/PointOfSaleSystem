@@ -1,7 +1,7 @@
 //John Rogers (the j-tees)
 // cse216
 // DBConnection
-//package MyTest;
+package ProcessSale;
 
 import java.sql.*;
 import java.util.ArrayList;

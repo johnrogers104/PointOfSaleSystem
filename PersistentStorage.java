@@ -1,5 +1,6 @@
-/*persistant storage class*/
+package ProcessSale;
 
+/*persistant storage class*/
 public class PersistentStorage{
     private static PersistentStorage ps = null;
     private DataBaseConnection db = null;

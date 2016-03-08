@@ -1,4 +1,4 @@
-
+package ProcessSale;
 
 // Class to hold info for a product in the cart
 public class SalesLineItem {
@@ -9,9 +9,9 @@ public class SalesLineItem {
     
     //constructor 
     //pass in the id/barcode of the current lineitem
-    public void SalesLineItem(String barcode){
+    public SalesLineItem(String barcode, int qty){
         desc = new ProductDescription(barcode);
-        
+        quantity = qty;
     }
       
     //method to get the subtotal of the purchase after adding this current item
