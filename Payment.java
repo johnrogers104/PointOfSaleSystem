@@ -21,7 +21,7 @@ public class Payment {
         
         // Check the type of payment
         if (type.equalsIgnoreCase("cash")) {
-            storage.makePayment(amount);
+            storage.makePayment(type, amount);
         } else {
             try {
                 int cardNum = Integer.parseInt(type);

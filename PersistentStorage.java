@@ -31,4 +31,15 @@ public class PersistentStorage{
 	return db.verifyMatch(userID, password, "Users", "employee_id", "passwords");
     }
 
+    public String getProductDesc(String barcode) {
+        return "not implemented";
+    }
+    
+    public int getProductPrice(String barcode) {
+        return -1;
+    }
+    
+    public boolean makePayment(String type, double amount) {
+        return false;
+    }
 }
