@@ -67,7 +67,7 @@ public class DataBaseConnection {
       can be either an insert, delete, or update query (not a generic
       select ... where ... from ... query). Does not return anything.
      */
-    public void newUpdateQuery(String q){
+    public boolean newUpdateQuery(String q){
 	try{
 	    Statement s = con.createStatement();
 	    s.executeUpdate(q);
@@ -75,7 +75,9 @@ public class DataBaseConnection {
 	}
 	catch(SQLException ex){
 	    ex.printStackTrace(System.out);
+	    return false;
 	}
+	return true;
     }
 
     /*

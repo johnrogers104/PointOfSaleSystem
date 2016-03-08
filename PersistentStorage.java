@@ -60,7 +60,8 @@ public class PersistentStorage{
 	return Integer.parseInt(inner.get(0));
     }
     
-    public boolean makePayment(String type, double amount) {
-        return false;
+    public boolean makePayment(String id, String type, double price, int quantity, String paymentType, String date, String due, String creditCardNum) {
+        String query = "insert into transaction values('"+id+"','"+type+"',"+price+","+quantity+",'"+paymentType+"','"+date+"','"+due+"','"+creditCardNum+"')";
+	return db.newUpdateQuery(query);
     }
 }
