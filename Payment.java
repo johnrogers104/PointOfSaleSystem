@@ -19,11 +19,11 @@ public class Payment {
         
         // Check the type of payment
         if (type.equalsIgnoreCase("cash")) {
-            PersistantStorage.makePayment(amount);
+            PersistentStorage.makePayment(amount);
         } else {
             try {
                 int cardNum = Integer.parseInt(type);
-                PersistenStorage.makePayment(type, amount);
+                PersistentStorage.makePayment(type, amount);
                 
             } catch (NumberFormatException e) {
                 System.out.println("Error: not a credit card number");

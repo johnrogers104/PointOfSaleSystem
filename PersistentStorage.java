@@ -1,20 +1,21 @@
 /*persistant storage class*/
 
-public class PersistantStorage{
-    private static PersistantStorage ps = null;
+public class PersistentStorage{
+    private static PersistentStorage ps = null;
     private DataBaseConnection db = null;
 
-    private PersistantStorage(){
+    private PersistentStorage(){
 	db = DataBaseConnection.getInstance();
     }
 
-    public static PersistantStorage getInstance(){
+    public static PersistentStorage getInstance(){
 	if(ps == null){
-	    ps = new PersistantStorage();
+	    ps = new PersistentStorage();
 	}
 	else{
 	    return ps;
 	}
+        return ps;
     }
 
     public boolean isUser(String user){
