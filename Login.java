@@ -1,4 +1,6 @@
-package my.login;
+package ProcessSale;
+
+
 import java.io.*;
 import java.sql.*;
 import java.util.Scanner;

@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package my.login;
+package ProcessSale;
 
 import javax.swing.JTextField;
 
 /**
- *
- * @author JGabbay
+
  */
+
+//
 public class loginButton extends javax.swing.JFrame {
-     DataBaseConnection con = DataBaseConnection.getInstance();
+     PersistentStorage storage;
      String employeeID = null;
      String employeePassword = null;
      
@@ -21,6 +22,7 @@ public class loginButton extends javax.swing.JFrame {
      */
     public loginButton() {
         initComponents();
+        storage = PersistentStorage.getInstance();
     }
 
     /**
@@ -127,19 +129,19 @@ public class loginButton extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonMouseClicked
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-         PersistentStorage.checkPassword(employeeID,employeePassword);
+         storage.checkPassword(employeeID,employeePassword);
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void EmployeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeIDActionPerformed
         employeeID = EmployeeID.getText();
         String tableName = "Users"; 
-        PersistentStorage.isUser(employeeID);
+        storage.isUser(employeeID);
     }//GEN-LAST:event_EmployeeIDActionPerformed
 
     private void EmployeePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeePasswordActionPerformed
         employeePassword = EmployeePassword.getText();
         String tableName = "Users";
-        PersistentStorage.isUser(employeePassword, tableName);
+        storage.isUser(employeePassword);
     }//GEN-LAST:event_EmployeePasswordActionPerformed
     
     /**
