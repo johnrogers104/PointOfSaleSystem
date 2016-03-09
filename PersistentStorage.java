@@ -40,7 +40,7 @@ public class PersistentStorage{
 
 
     public String getProductDesc(String barcode) {
-        String query = "select name_of_product, quantity, color, size_of_shirt, unit_price from inventory where barcorde = '"+barcode+"'";
+        String query = "select name_of_product, quantity, color, size_of_shirt, unit_price from inventory where barcode = '"+barcode+"'";
 	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
 	ArrayList<String> inner = new ArrayList<String>();
 	outer = db.newQuery(query, 5);
