@@ -11,7 +11,7 @@ public class Main {
         // Get username and password
         Scanner input = new Scanner(System.in);
         
-        System.out.println("Please enter your username and password: ");
+        System.out.println("Please enter your emplyee ID and password: ");
         String username = input.next();
         String password = input.next();
         LoginNoGUI login = new LoginNoGUI(username,password);
@@ -33,9 +33,11 @@ public class Main {
         while (!barcode.equalsIgnoreCase("q")) {
             System.out.println("Please enter an item barcode, or type q to quit");
             barcode = input.next();
-            System.out.println("How many would you like?");
-            qty = input.nextInt();
-            register.enterItem(barcode, qty);   
+            if (!barcode.equalsIgnoreCase("q")) {
+                System.out.println("How many would you like?");
+                qty = input.nextInt();
+                register.enterItem(barcode, qty);
+            }
         }
         if (register.hasSale()) {
             System.out.println("Please enter the credit card number or type c for cash...");
