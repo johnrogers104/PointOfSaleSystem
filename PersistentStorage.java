@@ -66,4 +66,10 @@ public class PersistentStorage{
 	//String query2 = "update inventory set quantity = quantity - "+quantity+" where ";
 	return db.newUpdateQuery(query);
     }
+
+    public boolean updateInventory(String barcode, int qty){
+        String query2 = "update inventory set quantity = quantity - "+qty+" where barcode = '"+barcode+"'";
+        return db.newUpdateQuery(query2);
+    }
+
 }

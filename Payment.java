@@ -24,7 +24,7 @@ public class Payment {
     public boolean finalizePayment() {
         
         // Variables used
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat formatter = new SimpleDateFormat("ddMMyyyy");
         String date = formatter.format(finalSale.time);
         
         // Check the type of payment

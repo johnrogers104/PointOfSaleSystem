@@ -16,12 +16,15 @@ public class Sale {
     boolean isComplete;
     Date time;
     ArrayList<SalesLineItem> cart;
-    
+    PersistentStorage storage;
+
+
     // Constructor
     public Sale() {
         time = new Date();
         isComplete = false;
         cart = new ArrayList<>();
+	storage = PersistentStorage.getInstance();
     }
     
     // Finalize the sale
@@ -32,6 +35,7 @@ public class Sale {
     // Create a new item for the sale
     public void makeItem(String barcode, int qty) {
         cart.add( new SalesLineItem(barcode, qty) );
+	storage.updateInventory(barcode, qty);
     }
     
     // Make a payment for this sale. Only 1 per sale
