@@ -55,7 +55,7 @@ public class PersistentStorage{
         String query = "select unit_price from inventory where barcode = '"+barcode+"'";
 	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
         ArrayList<String> inner = new ArrayList<String>();
-        outer = db.newQuery(query, 5);
+        outer = db.newQuery(query, 1);
         inner = outer.get(0);
 	return Integer.parseInt(inner.get(0));
     }

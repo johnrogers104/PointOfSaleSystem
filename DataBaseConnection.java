@@ -144,7 +144,7 @@ public class DataBaseConnection {
 	    ResultSet r = s.executeQuery("select * from "+tableName);
 	    ResultSetMetaData rsmd = r.getMetaData();
 	    int c = rsmd.getColumnCount();
-	    String query = "select * from "+tableName+" where "+columnName1+" = "+attribute1+" and "+columnName2+" = "+attribute2;
+	    String query = "select * from "+tableName+" where "+columnName1+" = '"+attribute1+"' and "+columnName2+" = '"+attribute2+"'";
 	    if(!newQuery(query, c).isEmpty()){
 		return true;
 	    }
