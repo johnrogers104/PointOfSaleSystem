@@ -21,6 +21,7 @@ public class PersistentStorage{
         return ps;
     }
 
+
     public boolean closeConnection(){
 	return db.close();
     }
@@ -55,13 +56,14 @@ public class PersistentStorage{
         String query = "select unit_price from inventory where barcode = '"+barcode+"'";
 	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
         ArrayList<String> inner = new ArrayList<String>();
-        outer = db.newQuery(query, 5);
+        outer = db.newQuery(query, 1);
         inner = outer.get(0);
 	return Integer.parseInt(inner.get(0));
     }
     
     public boolean makePayment(String id, String type, double price, int quantity, String paymentType, String date, String due, String creditCardNum) {
         String query = "insert into transaction values('"+id+"','"+type+"',"+price+","+quantity+",'"+paymentType+"','"+date+"','"+due+"','"+creditCardNum+"')";
+	//String query2 = "update inventory set quantity = quantity - "+quantity+" where ";
 	return db.newUpdateQuery(query);
     }
 }

@@ -49,6 +49,17 @@ public class DataBaseConnection {
       DataBaseConnection object.  Returns true if success, false
       on failure.
      */
+
+    public void commit(){
+	try{
+	    con.commit();
+	}
+	catch(SQLException ex){
+	    System.out.println("could not commit!");
+	    System.exit(1);
+	}
+    }
+
     
     public boolean close(){
 	try{
@@ -72,6 +83,7 @@ public class DataBaseConnection {
 	    Statement s = con.createStatement();
 	    s.executeUpdate(q);
 	    s.close();
+	    commit();
 	}
 	catch(SQLException ex){
 	    ex.printStackTrace(System.out);
@@ -144,7 +156,7 @@ public class DataBaseConnection {
 	    ResultSet r = s.executeQuery("select * from "+tableName);
 	    ResultSetMetaData rsmd = r.getMetaData();
 	    int c = rsmd.getColumnCount();
-	    String query = "select * from "+tableName+" where "+columnName1+" = "+attribute1+" and "+columnName2+" = "+attribute2;
+	    String query = "select * from "+tableName+" where "+columnName1+" = '"+attribute1+"' and "+columnName2+" = '"+attribute2+"'";
 	    if(!newQuery(query, c).isEmpty()){
 		return true;
 	    }
