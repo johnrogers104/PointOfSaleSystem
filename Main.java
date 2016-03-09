@@ -27,13 +27,15 @@ public class Main {
         Register register = new Register();
         register.makeNewSale();
         
-        System.out.println("Please enter an item barcode, or type q to quit");
-        String barcode = input.next();
-        int qty;
+        
+        String barcode = "";
+        int qty = -1;
         while (!barcode.equalsIgnoreCase("q")) {
+            System.out.println("Please enter an item barcode, or type q to quit");
+            barcode = input.next();
             System.out.println("How many would you like?");
             qty = input.nextInt();
-            register.enterItem(barcode, qty);
+            register.enterItem(barcode, qty);   
         }
         if (register.hasSale()) {
             System.out.println("Please enter the credit card number or type c for cash...");
