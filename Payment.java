@@ -2,6 +2,10 @@
 package ProcessSale;
 
 // Class to make a payment for a sale
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class Payment {
     
     // Class variables
@@ -20,21 +24,22 @@ public class Payment {
     public boolean finalizePayment() {
         
         // Variables used
-        String date = finalSale.time.toString();
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String date = formatter.format(finalSale.time);
         
         // Check the type of payment
         if (type.equalsIgnoreCase("cash")) {
             
             for (SalesLineItem item: finalSale.cart) {
                 String id = Integer.toString( (int)(Math.random() * 1000 + 1) );
-                storage.makePayment(id, "Purchase", item.getPrice(), item.quantity, "Cash", date, "null", "null");
+                storage.makePayment(id, "Purch", item.getPrice(), item.quantity, "Cash", date, "null", "null");
             } 
         } else {
             try {
                 Integer.parseInt(type);
                 for (SalesLineItem item: finalSale.cart) {
                     String id = Integer.toString( (int)(Math.random() * 1000 + 1) );
-                    storage.makePayment(id, "Purchase", item.getPrice(), item.quantity, "Card", date, "null", type);
+                    storage.makePayment(id, "Purch", item.getPrice(), item.quantity, "Card", date, "null", type);
                 } 
             } catch (NumberFormatException e) {
                 System.out.println("Error: not a credit card number");
