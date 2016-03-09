@@ -36,8 +36,7 @@ public class Sale {
     
     // Make a payment for this sale. Only 1 per sale
     public boolean makePayment(String type) {
-        double total = getTotal();
-        Payment payment = new Payment(type, total);
+        Payment payment = new Payment(this, type);
         payment.finalizePayment();
         return true;
     }

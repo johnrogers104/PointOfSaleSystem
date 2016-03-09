@@ -6,27 +6,36 @@ public class Payment {
     
     // Class variables
     String type;
-    double amount;
     PersistentStorage storage;
+    Sale finalSale;
     
     // Constructor
-    public Payment(String type, double amount) {
+    public Payment(Sale finalSale, String type) {
         this.type = type;
-        this.amount = amount;
+        this.finalSale = finalSale;
         storage = PersistentStorage.getInstance();
     }
     
     // Upload the payment to the database
     public boolean finalizePayment() {
         
+        // Variables used
+        String date = finalSale.time.toString();
+        
         // Check the type of payment
         if (type.equalsIgnoreCase("cash")) {
-            storage.makePayment(type, amount);
+            
+            for (SalesLineItem item: finalSale.cart) {
+                String id = Integer.toString( (int)(Math.random() * 1000 + 1) );
+                storage.makePayment(id, "Purchase", item.getPrice(), item.quantity, "Cash", date, "null", "null");
+            } 
         } else {
             try {
-                int cardNum = Integer.parseInt(type);
-                storage.makePayment(type, amount);
-                
+                Integer.parseInt(type);
+                for (SalesLineItem item: finalSale.cart) {
+                    String id = Integer.toString( (int)(Math.random() * 1000 + 1) );
+                    storage.makePayment(id, "Purchase", item.getPrice(), item.quantity, "Card", date, "null", type);
+                } 
             } catch (NumberFormatException e) {
                 System.out.println("Error: not a credit card number");
                 return false;

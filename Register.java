@@ -29,12 +29,18 @@ public class Register {
     // Make a payment for the transaction and th
     public void makePayment(String type) {
         currentSale.makePayment(type);
-        endSale();
     }
     
     // End the transaction without a payment
     public void endSale() {
-        currentSale = null;
+        currentSale.becomeComplete();
+       currentSale = null;
     }
     
+    public boolean hasSale() {
+        if (currentSale == null) {
+            return false;
+        }
+        return true;
+    }
 }

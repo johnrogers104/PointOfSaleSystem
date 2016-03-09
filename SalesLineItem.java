@@ -24,7 +24,10 @@ public class SalesLineItem {
         //Adjust the price based on the number of the same items
         int subTotal = price * quantity;
         return subTotal;
-        
-        
+    }
+    
+    // Get the price of the item
+    public double getPrice() {
+        return desc.getPrice();
     }
 }
