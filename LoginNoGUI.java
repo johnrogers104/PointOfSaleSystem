@@ -23,8 +23,9 @@ public class LoginNoGUI {
     public boolean isValidUser() {
         boolean valid = false;
         if ( storage.isUser(employeeID) ) {
-            valid = storage.checkPassword(employeeID,employeePassword);
+            return  storage.checkPassword(employeeID,employeePassword);
         }
+	storage.closeConnection();
         return valid;
     }
      

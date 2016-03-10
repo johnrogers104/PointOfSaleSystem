@@ -1,4 +1,3 @@
-
 package ProcessSale;
 
 import java.util.Scanner;

@@ -63,7 +63,6 @@ public class PersistentStorage{
     
     public boolean makePayment(String id, String type, double price, int quantity, String paymentType, String date, String due, String creditCardNum) {
         String query = "insert into transaction values('"+id+"','"+type+"',"+price+","+quantity+",'"+paymentType+"','"+date+"','"+due+"','"+creditCardNum+"')";
-	//String query2 = "update inventory set quantity = quantity - "+quantity+" where ";
 	return db.newUpdateQuery(query);
     }
 

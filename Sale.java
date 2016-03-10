@@ -42,6 +42,7 @@ public class Sale {
     public boolean makePayment(String type) {
         Payment payment = new Payment(this, type);
         payment.finalizePayment();
+	storage.closeConnection();
         return true;
     }
     
