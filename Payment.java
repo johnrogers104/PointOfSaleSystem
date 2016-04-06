@@ -49,5 +49,14 @@ public class Payment {
         return true;
     }
     
+    // Begin a rental with the payment put in and update the database
+    // May not need to implement
+    public boolean startRental() {
+        return finalizePayment();
+    }
     
+    // End the rental and update the database
+    public boolean endRental() {
+        return false;
+    }
 }

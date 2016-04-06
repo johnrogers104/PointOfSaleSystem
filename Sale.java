@@ -18,7 +18,6 @@ public class Sale {
     ArrayList<SalesLineItem> cart;
     PersistentStorage storage;
 
-
     // Constructor
     public Sale() {
         time = new Date();
@@ -54,4 +53,6 @@ public class Sale {
         }
         return total;
     }
+    
+    
 }
