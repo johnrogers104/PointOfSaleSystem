@@ -21,6 +21,11 @@ public class Register {
         currentSale = new Sale();
     }
     
+    // Create a new Transaction
+    public void makeNewRental() {
+        currentSale = new Rental();
+    }
+    
     // Enter an item into the sale
     public void enterItem(String barcode, int quantity) {
         currentSale.makeItem(barcode, quantity);
@@ -31,16 +36,32 @@ public class Register {
         currentSale.makePayment(type);
     }
     
+    // Cancel a sale
+    public void cancelSale() {
+        currentSale = null;
+    }
+    
     // End the transaction without a payment
     public void endSale() {
         currentSale.becomeComplete();
-       currentSale = null;
+        currentSale = null;
     }
     
+    // Check if there is a current sale being processed
     public boolean hasSale() {
         if (currentSale == null) {
             return false;
         }
         return true;
+    }
+    
+    // End a rental if the current sale is a rental
+    public void endRental() {
+        // Check if it is a rental
+        if (currentSale instanceof Rental) {
+            
+        } else {
+            System.out.println("Error: No current rental to end");
+        }
     }
 }
