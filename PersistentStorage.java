@@ -33,12 +33,28 @@ public class PersistentStorage{
     public boolean isInventory(String barcode){
 	return db.isInDataBase(barcode, "Inventory");
     }
-
+     
     public boolean checkPassword(String userID, String password){
 	return db.verifyMatch(userID, password, "Users", "employee_id", "passwords");
     }
+    
+    public boolean checkRolePermission(String password, String role) {
+        return db.verifyMatch(password, role, "Users", "passwords", "role");
+    }
 
-
+    public String getRole(String employeeID) {
+        String query = "select role from users where employee_id = '"+ employeeID+"'";
+	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
+	ArrayList<String> inner = new ArrayList<String>();
+	outer = db.newQuery(query, 1);
+	inner = outer.get(0);
+	String combined = "";
+	for(int i=0; i<inner.size(); i++){
+	    combined += inner.get(i) + " ";
+	}
+	return combined;
+    }
+    
     public String getProductDesc(String barcode) {
         String query = "select name_of_product, quantity, color, size_of_shirt, unit_price from inventory where barcode = '"+barcode+"'";
 	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
