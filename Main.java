@@ -9,10 +9,12 @@ public class Main {
         
         // Get username and password
         Scanner input = new Scanner(System.in);
-        
-        System.out.println("Please enter your emplyee ID and password: ");
-        String username = input.next();
-        String password = input.next();
+      
+        System.out.println("Please enter your employee ID and password");
+        String username = input.nextLine();
+        String password = input.nextLine();
+    
+
         LoginNoGUI login = new LoginNoGUI(username,password);
         
         // Check validity
@@ -22,7 +24,44 @@ public class Main {
         }
         
         System.out.println("Welcome " + username + "!");
-        System.out.println("Starting up the register...");
+        
+        ManagingUsers userRole = new ManagingUsers(username);
+        String role = userRole.getRoles(username, password); 
+        System.out.println("Role: " + role);
+          
+       boolean proceed = true;
+       while (proceed == true) {
+        if (role.trim().equals("MANAGER")) { //trim() removes extra whitespace
+            System.out.println("Would you like to ~Add User~ ~Delete User~ ~Transaction~");
+            String managerAnswer = input.nextLine().toUpperCase();
+            if (managerAnswer.equals("ADD USER")) {
+                ManagingUsers addUser = new ManagingUsers(username);
+                    System.out.println("What will be the User's new Employee_ID?");
+                        String newID = input.nextLine();
+                    System.out.println("What will be the User's new Employee Name?");
+                        String newName = input.nextLine();
+                    System.out.println("What will be the User's new Role?");
+                        String newRole = input.nextLine();
+                    System.out.println("What will be the User's new Password?");
+                        String newPassword = input.nextLine();
+                addUser.insert(newID, newName, newRole, newPassword);
+                    System.out.println("~Succesfully Added User~");
+            } else if (managerAnswer.equals("DELETE USER")) {
+                ManagingUsers deleteUser = new ManagingUsers(username);
+                    System.out.println("Enter the user's password for confirmation: ");
+                        String deleteUserPassword = input.nextLine();
+                deleteUser.delete(deleteUserPassword);
+                    System.out.println("~Succesfully Deleted User~");
+            } else if (managerAnswer.equals("TRANSACTION")){
+                      System.out.println("~Continue Transaction~");
+                      proceed = false;
+            } else {
+                System.out.println("Error in Manager Answer");
+            } 
+        }
+       }
+       
+        System.out.println("\nStarting up the register...");
         Register register = new Register();
         register.makeNewSale();
         
