@@ -1,4 +1,4 @@
-package ProcessSale;
+package homework7;
 
 // Class that contains info of a product
 public class ProductDescription {

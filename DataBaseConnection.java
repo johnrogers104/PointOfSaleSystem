@@ -169,4 +169,8 @@ public class DataBaseConnection {
 	    return false;
 	}
     }
+<<<<<<< Updated upstream
 }
+=======
+} 
+>>>>>>> Stashed changes
