@@ -105,12 +105,12 @@ public class PersistentStorage{
 
 	String query2 = "select barcode, quantity_of_purchase from cart where transaction_id = "+rentalID;
 	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
-	outer = db.newQuery(query2, 2);
-	return outer;
+	outer2 = db.newQuery(query2, 2);
+	return outer2;
     }
     
     public boolean returnInventory(String barcode, int quantity){
-	String query2 = "update inventory set quantity = quantity + "+qty+" where barcode = '"+barcode+"'";
+	String query2 = "update inventory set quantity = quantity + "+quantity+" where barcode = '"+barcode+"'";
         return db.newUpdateQuery(query2);
 
     }
