@@ -25,12 +25,11 @@ public class Rental extends Sale {
         String date = formatter.format(dateReturned);
 	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
 	ArrayList<String> inner = new ArrayList<String>();
-	
         outer = storage.getRentalCart(date, card);
 	for(int i=0; i<outer.size(); i++){
 		inner = outer.get(i);
 		String barcode = inner.get(0);
-		int qty = inner.get(1);
+		int qty = Integer.parseInt(inner.get(1));
 		storage.returnInventory(barcode, qty);
 	}
 
