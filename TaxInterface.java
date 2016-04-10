@@ -20,4 +20,9 @@ public class TaxInterface {
 	    return ti;
     }
 
+    public static double getTax(double subtotal){
+	double tax = ti.calculateTax(subtotal);
+	return tax;
+    }
+
 }
