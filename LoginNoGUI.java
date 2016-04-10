@@ -6,17 +6,40 @@
 package ProcessSale;
 
 // Login class
-public class LoginNoGUI {
+
+import java.util.Observable;
+
+public class LoginNoGUI extends Observable {
     
     PersistentStorage storage;
     String employeeID;
     String employeePassword;    
     
     // Constructor
+    public LoginNoGUI() {
+        storage = PersistentStorage.getInstance();
+    }
+    
     public LoginNoGUI(String id, String password) {
         employeeID = id;
         employeePassword = password;
         storage = PersistentStorage.getInstance();
+    }
+    
+    public void newUser() {
+        setChanged();
+        notifyObservers(this);
+        clearChanged();
+    }
+    
+    public void setID(String id) {
+        employeeID = id;
+    }
+    public void setPassword(String password) {
+        employeePassword = password;
+    }
+    public String getID() {
+        return employeeID;
     }
     
     // Check if the user is valid

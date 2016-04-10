@@ -1,10 +1,6 @@
 package ProcessSale;
 
 import java.util.ArrayList;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 /*persistant storage class*/
 public class PersistentStorage{
@@ -93,26 +89,6 @@ public class PersistentStorage{
     
     public boolean returnItems(String barcode, int qty) {
         return false;
-    }
-
-    public ArrayList<ArrayList<String>> getRentalCart(String dateRented, String card){
-	String query = "select transaction_id from transaction where date_of = "+dateRented+" and credit_card_num = "+card;
-	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
-        ArrayList<String> inner = new ArrayList<String>();
-        outer = db.newQuery(query, 1);
-        inner = outer.get(0);
-	String rentalID = inner.get(0);
-
-	String query2 = "select barcode, quantity_of_purchase from cart where transaction_id = "+rentalID;
-	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
-	outer2 = db.newQuery(query2, 2);
-	return outer2;
-    }
-    
-    public boolean returnInventory(String barcode, int quantity){
-	String query2 = "update inventory set quantity = quantity + "+quantity+" where barcode = '"+barcode+"'";
-        return db.newUpdateQuery(query2);
-
     }
 
 }

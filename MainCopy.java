@@ -7,25 +7,22 @@
     import javax.swing.*;
     import java.awt.*;
     // Class to run the program
-    public class Main extends Observable {
-
-
+    public class MainCopy extends Observable {
 
         public static void main(String[] args) {
 
             // Get username and password
+            LoginNoGUI login = new LoginNoGUI();
+            LoginController loginCont = new LoginController();
             
-            
-            Main login = new Main();
-            LoginController logCont = new LoginController();
-
-            //logCont.addLogin(login);
+            loginCont.addLogin(login);
 
             LoginGUI loginGUI = new LoginGUI();
-            loginGUI.addController(logCont);
+            loginGUI.addController(loginCont);
             login.addObserver(loginGUI);
             
-
+            /*
+            
             // Perform manager methods
             // manager(input, username, password);
 
@@ -38,11 +35,11 @@
             RegisterGUI regGUI = new RegisterGUI();
             regGUI.addController(regCont);
             register.addObserver(regGUI);
+            
+            */
 
         }
 
-        
-        
         
         public static void manager(String username, String password) {
             Scanner input = new Scanner(System.in);
@@ -68,13 +65,13 @@
                         System.out.println("What will be the User's new Password?");
                         String newPassword = input.nextLine();
 
-                        addUser.insert(newID, newName, newRole, newPassword);
+                        addUser.addUser(newID, newName, newRole, newPassword);
                         System.out.println("~Succesfully Added User~");
                     } else if (managerAnswer.equals("DELETE USER")) {
                         ManagingUsers deleteUser = new ManagingUsers(username);
                         System.out.println("Enter the user's password for confirmation: ");
                         String deleteUserPassword = input.nextLine();
-                        deleteUser.delete(deleteUserPassword);
+                        deleteUser.deleteUser(deleteUserPassword);
                         System.out.println("~Succesfully Deleted User~");
                     } else if (managerAnswer.equals("TRANSACTION")) {
                         System.out.println("~Continue Transaction~");

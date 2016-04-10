@@ -8,15 +8,14 @@ package ProcessSale;
 // Import methods
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 // Class to act as a controler for the rental class
 public class LoginController implements ActionListener {
     
     // private class variables
     private LoginNoGUI login;
-    JTextField userName, passWord;
+    
+    //private ManagingUsers manager;
     
     // Constructor
     public LoginController() {
@@ -32,7 +31,7 @@ public class LoginController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Perform different actions based on the event clicked
         if (e.getActionCommand().equals("Submit")) {
-            login.isValidUser();
+            login.newUser();           
         }
     }
 }

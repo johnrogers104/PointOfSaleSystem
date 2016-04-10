@@ -30,19 +30,27 @@ public class RegisterController implements ActionListener {
         // Perform different actions based on the event clicked
         if (e.getActionCommand().equals("New Sale")) {
             register.makeNewSale();
-        } else if (e.getActionCommand().equals("Pay")) {
-            String card = JOptionPane.showInputDialog("Enter card number. Leave blank to pay with cash");
-            try {
-                Integer.parseInt(card);
-                register.makePayment(card);
-            } catch (Exception exception) {
+        } 
+        else if (e.getActionCommand().equals("Pay")) {
+            if (register.currentSale != null) {
+                String card = JOptionPane.showInputDialog("Enter card number. Leave blank to pay with cash");
+                try {
+                    Integer.parseInt(card);
+                    register.makePayment(card);
+                } catch (Exception exception) {
+                    register.makePayment("Cash");
+                }
+            } else {
                 register.makePayment("Cash");
             }
-        } else if (e.getActionCommand().equals("New Rental")) {
+        } 
+        else if (e.getActionCommand().equals("New Rental")) {
             register.makeNewRental();
-        } else if (e.getActionCommand().equals("Cancel Sale")) {
+        } 
+        else if (e.getActionCommand().equals("Cancel Sale")) {
             register.cancelSale();
-        }  else if (e.getActionCommand().equals("Add Item")) {
+        } 
+        else if (e.getActionCommand().equals("Add Item")) {
             String barcode = JOptionPane.showInputDialog("Enter an item barcode");
             String qty = JOptionPane.showInputDialog("How many?");
             int intQty;

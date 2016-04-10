@@ -25,7 +25,7 @@ public class Main {
         System.out.println("Welcome " + username + "!");
 
         // Perform manager methods
-        // manager(input, username, password);
+        manager(input, username, password);
         
         // Set up initial register GUI and
         Register register = new Register();
@@ -91,13 +91,13 @@ public class Main {
                     System.out.println("What will be the User's new Password?");
                     String newPassword = input.nextLine();
                     
-                    addUser.insert(newID, newName, newRole, newPassword);
+                    addUser.addUser(newID, newName, newRole, newPassword);
                     System.out.println("~Succesfully Added User~");
                 } else if (managerAnswer.equals("DELETE USER")) {
                     ManagingUsers deleteUser = new ManagingUsers(username);
                     System.out.println("Enter the user's password for confirmation: ");
                     String deleteUserPassword = input.nextLine();
-                    deleteUser.delete(deleteUserPassword);
+                    deleteUser.deleteUser(deleteUserPassword);
                     System.out.println("~Succesfully Deleted User~");
                 } else if (managerAnswer.equals("TRANSACTION")) {
                     System.out.println("~Continue Transaction~");

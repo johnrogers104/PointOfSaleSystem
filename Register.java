@@ -52,15 +52,25 @@ public class Register extends Observable {
             setChanged();
             notifyObservers("Pay");
             clearChanged();
+        } else {
+            setChanged();
+            notifyObservers("Can't Pay");
+            clearChanged();
         }
     }
     
     // Cancel a sale
     public void cancelSale() {
-        currentSale = null;
-        setChanged();
-        notifyObservers("Cancel Sale");
-        clearChanged();
+        if (currentSale != null) {
+            currentSale = null;
+            setChanged();
+            notifyObservers("Cancel Sale");
+            clearChanged();
+        } else {
+            setChanged();
+            notifyObservers("Can't Cancel");
+            clearChanged();
+        }
     }
     
     // End the transaction without a payment

@@ -58,12 +58,18 @@ class RegisterGUI implements Observer {
         else if (subjectChange.equals("Pay")) {
             notificationTF.setText("Payment Successful!"); 
         } 
+        else if (subjectChange.equals("Can't Pay")) {
+            notificationTF.setText("No Sale To Pay For!"); 
+        } 
         else if (subjectChange.equals("Rental")) {
             notificationTF.setText("New Rental!"); 
             itemsRentedTF.setText("Items Rented: \n");
         } 
         else if (subjectChange.equals("Cancel Sale")) {
             notificationTF.setText("Canceled The Sale"); 
+        } 
+        else if (subjectChange.equals("Can't Cancel")) {
+            notificationTF.setText("No Sale To Cancel!"); 
         } 
         else if (subjectChange instanceof ArrayList<?>) {
             notificationTF.setText("Added An Item!"); 

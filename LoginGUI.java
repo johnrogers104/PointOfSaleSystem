@@ -5,6 +5,9 @@ import java.util.Observer;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.concurrent.TimeUnit;
 
 // GUI interface for the rental class
 class LoginGUI implements Observer {
@@ -26,13 +29,26 @@ class LoginGUI implements Observer {
         welcomeTF = new JLabel("Please Enter Your EmployeeID and Password: \n");
         welcomeTF.setPreferredSize( new Dimension( 350, 80 ) );
         
-        
-        
         username = new JTextField("EmployeeID");
         password = new JTextField("Password");
-        
         submit = new JButton("Submit");
         
+        username.setPreferredSize( new Dimension( 100, 20 ) );
+        password.setPreferredSize( new Dimension( 100, 20 ) );
+        
+        // Clear the text after clicking on the box
+        username.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                username.setText("");
+            }
+        });
+        password.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                password.setText("");
+            }
+        });
         
         p.setLayout(fl);
         p.add(welcomeTF);
@@ -49,29 +65,48 @@ class LoginGUI implements Observer {
     }
    
     // Add a controller for this view
-    public void addController(ActionListener controller) { 
+    public void addController(ActionListener controller) {
         submit.addActionListener(controller);     
     }
 
     
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Observable subject, Object subjectChange) {
         
-            String userName = username.getText();
-            String passWord = password.getText();
-           
-            LoginNoGUI login = new LoginNoGUI(userName, passWord);
+        // Check if user is valid
+        if (subjectChange instanceof LoginNoGUI) {
+            LoginNoGUI login = (LoginNoGUI) subjectChange;
+            login.setID(username.getText());
+            login.setPassword(password.getText());
 
             // Check validity
             if (!login.isValidUser()) {
                 welcomeTF.setText("Please enter a valid username");
-                System.exit(1);
+            } else {
+                welcomeTF.setText("Welcome " + login.getID() + "!");
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch(Exception ex) {
+                }
+                
+                // Make this GUI invisible and set up the next one
+                f.setVisible(false);
+                
+                // Set up initial register GUI and its controller
+                Register register = new Register();
+                RegisterController regCont = new RegisterController();
+
+                regCont.addRegister(register);
+
+                RegisterGUI regGUI = new RegisterGUI();
+                regGUI.addController(regCont);
+                register.addObserver(regGUI);
             }
-            welcomeTF.setText("Welcome " + username + "!");
-        }
-        
-        
+        }   
     }
+        
+        
+}
    
     
     
