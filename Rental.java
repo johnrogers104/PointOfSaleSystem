@@ -5,6 +5,7 @@ package ProcessSale;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 // Class to handle a rental
 public class Rental extends Sale {
 
@@ -22,7 +23,7 @@ public class Rental extends Sale {
     }
     
     // Return an item that was rented
-    public boolean returnItem(String barcode, int qty) {
+    public boolean returnItems(String barcode, int qty) {
         return storage.returnItems(barcode, qty);
     }
     
