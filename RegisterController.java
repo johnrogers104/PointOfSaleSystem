@@ -31,13 +31,28 @@ public class RegisterController implements ActionListener {
         if (e.getActionCommand().equals("New Sale")) {
             register.makeNewSale();
         } else if (e.getActionCommand().equals("Pay")) {
-            register.makePayment("Cash");
-        } else if (e.getActionCommand().equals("Finish Sale")) {
-            register.endSale();
+            String card = JOptionPane.showInputDialog("Enter card number. Leave blank to pay with cash");
+            try {
+                Integer.parseInt(card);
+                register.makePayment(card);
+            } catch (Exception exception) {
+                register.makePayment("Cash");
+            }
         } else if (e.getActionCommand().equals("New Rental")) {
             register.makeNewRental();
         } else if (e.getActionCommand().equals("Cancel Sale")) {
             register.cancelSale();
+        }  else if (e.getActionCommand().equals("Add Item")) {
+            String barcode = JOptionPane.showInputDialog("Enter an item barcode");
+            String qty = JOptionPane.showInputDialog("How many?");
+            int intQty;
+            try {
+                intQty = Integer.parseInt(qty);
+                register.enterItem(barcode, intQty);
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(null, "Error: Not an integer");
+                System.out.println(exception.getMessage());
+            }
         }
     }
 }

@@ -8,9 +8,11 @@ package ProcessSale;
 // Imports
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
 
 // Class to perform a sale
-public class Sale {
+public class Sale extends Observable {
     
     // Class variables
     boolean isComplete;

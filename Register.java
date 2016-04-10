@@ -39,15 +39,20 @@ public class Register extends Observable {
     // Enter an item into the sale
     public void enterItem(String barcode, int quantity) {
         currentSale.makeItem(barcode, quantity);
-        
+        setChanged();
+        notifyObservers(currentSale.cart);
+        clearChanged();
     }
     
     // Make a payment for the transaction and th
     public void makePayment(String type) {
-        currentSale.makePayment(type);
-        setChanged();
-        notifyObservers("Pay");
-        clearChanged();
+        if (currentSale != null) {
+            currentSale.makePayment(type);
+            endSale();
+            setChanged();
+            notifyObservers("Pay");
+            clearChanged();
+        }
     }
     
     // Cancel a sale
@@ -62,9 +67,6 @@ public class Register extends Observable {
     public void endSale() {
         currentSale.becomeComplete();
         currentSale = null;
-        setChanged();
-        notifyObservers("Finish");
-        clearChanged();
     }
     
     // Check if there is a current sale being processed

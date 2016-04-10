@@ -1,4 +1,4 @@
-package homework7;
+package ProcessSale;
 
 // Class that contains info of a product
 public class ProductDescription {
@@ -11,6 +11,11 @@ public class ProductDescription {
     
     // Constructor
     public ProductDescription(String barcode) {
+        try {
+            this.barcode = Integer.parseInt(barcode);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
         storage = PersistentStorage.getInstance();
         if (storage.isInventory(barcode)) {
             description = storage.getProductDesc(barcode);
@@ -22,6 +27,14 @@ public class ProductDescription {
     
     public int getPrice(){
         return price;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public int getBarcode() {
+        return barcode;
     }
     
 }

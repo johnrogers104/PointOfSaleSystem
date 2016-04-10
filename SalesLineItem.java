@@ -30,4 +30,8 @@ public class SalesLineItem {
     public double getPrice() {
         return desc.getPrice();
     }
+    
+    public String toString() {
+        return "Barcode: " + desc.getBarcode() + ", Qty: " + quantity + ", $" + desc.getPrice();
+    }
 }
