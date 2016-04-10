@@ -45,11 +45,22 @@ class RegisterGUI implements Observer {
     
     // Update the GUI
     public void update(Observable subject, Object subjectChange) { 
-        if (subjectChange.equals("Pay")) {
-            itemsRentedTF.setText("Payment Successful!"); 
-        } else if (subjectChange.equals("Sale")) {
+        if (subjectChange.equals("Sale")) {
             itemsRentedTF.setText("New Sale!"); 
-        } else {
+        } 
+        else if (subjectChange.equals("Pay")) {
+            itemsRentedTF.setText("Payment Successful!"); 
+        } 
+        else if (subjectChange.equals("Finish")) {
+            itemsRentedTF.setText("Completed The Sale!"); 
+        } 
+        else if (subjectChange.equals("Rental")) {
+            itemsRentedTF.setText("New Rental!"); 
+        } 
+        else if (subjectChange.equals("Cancel Sale")) {
+            itemsRentedTF.setText("Canceled The Sale"); 
+        } 
+        else {
             itemsRentedTF.setText("Items Rented: 2");    // + ((Integer) subjectChange).toString());
         }
     }
@@ -59,6 +70,8 @@ class RegisterGUI implements Observer {
         createSale.addActionListener(controller); 
         pay.addActionListener(controller); 
         endSale.addActionListener(controller); 
+        createRental.addActionListener(controller); 
+        cancelSale.addActionListener(controller); 
     }
 
 }

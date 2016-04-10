@@ -53,12 +53,18 @@ public class Register extends Observable {
     // Cancel a sale
     public void cancelSale() {
         currentSale = null;
+        setChanged();
+        notifyObservers("Cancel Sale");
+        clearChanged();
     }
     
     // End the transaction without a payment
     public void endSale() {
         currentSale.becomeComplete();
         currentSale = null;
+        setChanged();
+        notifyObservers("Finish");
+        clearChanged();
     }
     
     // Check if there is a current sale being processed
