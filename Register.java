@@ -5,8 +5,12 @@
  */
 package ProcessSale;
 
+// Import statements
+import java.util.Observable;
+import java.util.Observer;
+
 // Class for the register of a cashier
-public class Register {
+public class Register extends Observable {
     
     // Class variables
     Sale currentSale;
@@ -24,16 +28,19 @@ public class Register {
     // Create a new Transaction
     public void makeNewRental() {
         currentSale = new Rental();
+        notifyObservers(currentSale.cart);
     }
     
     // Enter an item into the sale
     public void enterItem(String barcode, int quantity) {
         currentSale.makeItem(barcode, quantity);
+        
     }
     
     // Make a payment for the transaction and th
     public void makePayment(String type) {
         currentSale.makePayment(type);
+        notifyObservers("pay");
     }
     
     // Cancel a sale
@@ -59,7 +66,8 @@ public class Register {
     public void endRental() {
         // Check if it is a rental
         if (currentSale instanceof Rental) {
-            
+            currentSale.becomeComplete();
+            currentSale = null;
         } else {
             System.out.println("Error: No current rental to end");
         }
