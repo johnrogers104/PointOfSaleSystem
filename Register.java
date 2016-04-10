@@ -23,12 +23,17 @@ public class Register extends Observable {
     // Create a new Transaction
     public void makeNewSale() {
         currentSale = new Sale();
+        setChanged();
+        notifyObservers("Sale");
+        clearChanged();
     }
     
     // Create a new Transaction
     public void makeNewRental() {
         currentSale = new Rental();
-        notifyObservers(currentSale.cart);
+        setChanged();
+        notifyObservers("Rental");
+        clearChanged();
     }
     
     // Enter an item into the sale
@@ -40,7 +45,9 @@ public class Register extends Observable {
     // Make a payment for the transaction and th
     public void makePayment(String type) {
         currentSale.makePayment(type);
-        notifyObservers("pay");
+        setChanged();
+        notifyObservers("Pay");
+        clearChanged();
     }
     
     // Cancel a sale

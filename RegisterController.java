@@ -29,11 +29,15 @@ public class RegisterController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Perform different actions based on the event clicked
         if (e.getActionCommand().equals("New Sale")) {
-            register.makeNewRental();
+            register.makeNewSale();
         } else if (e.getActionCommand().equals("Pay")) {
             register.makePayment("Cash");
         } else if (e.getActionCommand().equals("Finish Sale")) {
             register.endSale();
+        } else if (e.getActionCommand().equals("New Rental")) {
+            register.makeNewRental();
+        } else if (e.getActionCommand().equals("Cancel Sale")) {
+            register.cancelSale();
         }
     }
 }

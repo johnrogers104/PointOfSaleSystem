@@ -13,7 +13,7 @@ class RegisterGUI implements Observer {
     JPanel p;
     FlowLayout fl;
     JTextField itemsRentedTF;
-    JButton createSale, pay, endSale;
+    JButton createSale, pay, endSale, createRental, cancelSale;
     
     // Constructor to initially set up the GUI
     public RegisterGUI() {
@@ -22,15 +22,20 @@ class RegisterGUI implements Observer {
         fl = new FlowLayout(FlowLayout.CENTER);
         
         itemsRentedTF = new JTextField("Register: \n");
+        itemsRentedTF.setPreferredSize( new Dimension( 200, 100 ) );
         createSale = new JButton("New Sale");
         pay = new JButton("Pay");
         endSale = new JButton("Finish Sale");
+        createRental = new JButton("New Rental");
+        cancelSale = new JButton("Cancel Sale");
         
         p.setLayout(fl);
         p.add(itemsRentedTF);
         p.add(createSale);
         p.add(pay);
         p.add(endSale);
+        p.add(createRental);
+        p.add(cancelSale);
         
         f.setSize(400,400);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,10 +45,10 @@ class RegisterGUI implements Observer {
     
     // Update the GUI
     public void update(Observable subject, Object subjectChange) { 
-        if (subjectChange.equals("pay")) {
+        if (subjectChange.equals("Pay")) {
             itemsRentedTF.setText("Payment Successful!"); 
-        } else if (subjectChange instanceof Sale) {
-            itemsRentedTF.setText("New Sale");
+        } else if (subjectChange.equals("Sale")) {
+            itemsRentedTF.setText("New Sale!"); 
         } else {
             itemsRentedTF.setText("Items Rented: 2");    // + ((Integer) subjectChange).toString());
         }
