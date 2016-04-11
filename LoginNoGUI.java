@@ -52,4 +52,11 @@ public class LoginNoGUI extends Observable {
         return valid;
     }
      
+    // Check if the user is a manager
+    public boolean isManager() {
+        String role = storage.getRole(employeeID).trim();
+        if (role.equalsIgnoreCase("manager"))
+            return true;
+        return false;
+    }
 }  

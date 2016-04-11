@@ -84,23 +84,32 @@ class LoginGUI implements Observer {
                 welcomeTF.setText("Please enter a valid username");
             } else {
                 welcomeTF.setText("Welcome " + login.getID() + "!");
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch(Exception ex) {
-                }
                 
                 // Make this GUI invisible and set up the next one
                 f.setVisible(false);
                 
-                // Set up initial register GUI and its controller
-                Register register = new Register();
-                RegisterController regCont = new RegisterController();
+                // Open up the manager GUI if they are a manager
+                if (login.isManager()) {
+                    ManagingUsers manager = new ManagingUsers();
+                    ManagingUsersController managerCont = new ManagingUsersController();
+                    
+                    managerCont.addManageUsers(manager);
 
-                regCont.addRegister(register);
+                    ManagingUsersGUI manGUI = new ManagingUsersGUI();
+                    manGUI.addController(managerCont);
+                    manager.addObserver(manGUI);
+                    
+                } else {
+                    // Set up initial register GUI and its controller
+                    Register register = new Register(new Sale());
+                    RegisterController regCont = new RegisterController();
 
-                RegisterGUI regGUI = new RegisterGUI();
-                regGUI.addController(regCont);
-                register.addObserver(regGUI);
+                    regCont.addRegister(register);
+
+                    RegisterGUI regGUI = new RegisterGUI();
+                    regGUI.addController(regCont);
+                    register.addObserver(regGUI);
+                }
             }
         }   
     }

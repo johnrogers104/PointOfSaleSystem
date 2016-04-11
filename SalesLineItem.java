@@ -32,6 +32,14 @@ public class SalesLineItem {
     }
     
     public String toString() {
-        return "Barcode: " + desc.getBarcode() + ", Qty: " + quantity + ", $" + desc.getPrice();
+        return "Barcode: " + getBarcode() + ", Qty: " + quantity + ", $" + desc.getPrice();
+    }
+    
+    public int getBarcode() {
+        return desc.getBarcode();
+    }
+    
+    public int getQuantity() {
+        return quantity;
     }
 }

@@ -20,6 +20,10 @@ public class Register extends Observable {
         
     }
     
+    public Register(Sale sale) {
+        currentSale = sale;
+    }
+    
     // Create a new Transaction
     public void makeNewSale() {
         currentSale = new Sale();
@@ -62,6 +66,7 @@ public class Register extends Observable {
     // Cancel a sale
     public void cancelSale() {
         if (currentSale != null) {
+            currentSale.cancelSale();
             currentSale = null;
             setChanged();
             notifyObservers("Cancel Sale");
@@ -96,5 +101,10 @@ public class Register extends Observable {
         } else {
             System.out.println("Error: No current rental to end");
         }
+    }
+    
+    // Return an item
+    public void returnItem(String id, String barcode, int quantity) {
+        currentSale.returnItem(id, barcode, quantity);
     }
 }

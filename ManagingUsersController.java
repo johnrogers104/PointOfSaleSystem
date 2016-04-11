@@ -15,7 +15,7 @@ public class ManagingUsersController implements ActionListener {
 
     // method to add a model to this class
     public void addManageUsers(ManagingUsers m){
-	this.users = m
+	this.users = m;
     }
 
     public void actionPerformed(ActionEvent ae){
@@ -28,9 +28,12 @@ public class ManagingUsersController implements ActionListener {
 	    String id = Integer.toString(intID);
 	    users.addUser(id, name, role, password);
 	}
-	else if(ae.getActionCommand().equals("Fire employee")){
+	else if(ae.getActionCommand().equals("Fire Employee")){
 	    String id = JOptionPane.showInputDialog("Enter employee you wish to fire's ID");
 	    users.deleteUser(id);
+	}
+        else if(ae.getActionCommand().equals("Start Register")){
+            users.startRegister();
 	}
 	else if(ae.getActionCommand().equals("Cancel")){
 	    

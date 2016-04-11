@@ -18,6 +18,7 @@ public class Sale extends Observable {
     boolean isComplete;
     Date time;
     ArrayList<SalesLineItem> cart;
+    int id;
     PersistentStorage storage;
 
     // Constructor
@@ -25,6 +26,7 @@ public class Sale extends Observable {
         time = new Date();
         isComplete = false;
         cart = new ArrayList<>();
+        id = (int)(Math.random() * 1000 + 1);
 	storage = PersistentStorage.getInstance();
     }
     
@@ -36,14 +38,18 @@ public class Sale extends Observable {
     // Create a new item for the sale
     public void makeItem(String barcode, int qty) {
         cart.add( new SalesLineItem(barcode, qty) );
-	storage.updateInventory(barcode, qty);
     }
     
     // Make a payment for this sale. Only 1 per sale
     public boolean makePayment(String type) {
-        Payment payment = new Payment(this, type);
+        Payment payment = new Payment(this, type, id);
         payment.finalizePayment();
-	storage.closeConnection();
+        
+        // Add items to the cart in the database
+        for (SalesLineItem item: cart) {
+            String barcode = Integer.toString(item.getBarcode());
+            storage.updateInventory(barcode, item.getQuantity(), id);
+        }
         return true;
     }
     
@@ -56,5 +62,16 @@ public class Sale extends Observable {
         return total;
     }
     
+    // Cancell this current sale
+    public void cancelSale() {
+        // Remove all objects
+        cart = null;
+        id = 0;
+    }
+    
+    // Return an item from a sale
+    public void returnItem(String id, String barcode, int quantity) {
+        storage.returnItem(barcode, quantity);
+    }
     
 }

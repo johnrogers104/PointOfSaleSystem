@@ -82,13 +82,23 @@ public class PersistentStorage{
 	return db.newUpdateQuery(query);
     }
 
-    public boolean updateInventory(String barcode, int qty){
-        String query2 = "update inventory set quantity = quantity - "+qty+" where barcode = '"+barcode+"'";
+    public boolean updateInventory(String barcode, int qty, int id){
+        String query1 = "update inventory set quantity = quantity - "+qty+" where barcode = '"+barcode+"'";
+        String query2 = "insert into cart values ('" + id + "','" + barcode + "'," + qty + ")";
+        db.newUpdateQuery(query1);
+        return db.newUpdateQuery(query2);
+        
+    }
+    
+    public boolean returnItem(String barcode, int qty) {
+        String query2 = "update inventory set quantity = quantity + "+qty+" where barcode = '"+barcode+"'";
         return db.newUpdateQuery(query2);
     }
     
-    public boolean returnItems(String barcode, int qty) {
-        return false;
+    public boolean removeFromCart(String barcode, int qty, int id) {
+        returnItem(barcode, qty);
+        String query2 = "delete from cart where TRANSACTION_ID = " + id;
+        return db.newUpdateQuery(query2);
     }
 
 }
