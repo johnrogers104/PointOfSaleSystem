@@ -81,7 +81,7 @@ class LoginGUI implements Observer {
 
             // Check validity
             if (!login.isValidUser()) {
-                welcomeTF.setText("Please enter a valid username");
+                welcomeTF.setText("Please enter a valid userID");
             } else {
                 welcomeTF.setText("Welcome " + login.getID() + "!");
                 

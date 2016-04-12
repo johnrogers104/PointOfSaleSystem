@@ -5,7 +5,8 @@ public class ProductDescription {
     
     // Variables
     String description;
-    int price; 
+    int salePrice; 
+    int rentPrice;
     int barcode;
     PersistentStorage storage;
     
@@ -19,14 +20,19 @@ public class ProductDescription {
         storage = PersistentStorage.getInstance();
         if (storage.isInventory(barcode)) {
             description = storage.getProductDesc(barcode);
-            price = storage.getProductPrice(barcode);
+            salePrice = storage.getSaleProductPrice(barcode);
+            rentPrice = storage.getRentProductPrice(barcode);
         } else {
             description = "Error";
         }
     }
     
-    public int getPrice(){
-        return price;
+    public int getSalePrice(){
+        return salePrice;
+    }
+    
+    public int getRentPrice(){
+        return rentPrice;
     }
     
     public String getDescription() {

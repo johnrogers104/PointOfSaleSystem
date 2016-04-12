@@ -1,6 +1,5 @@
 package ProcessSale;
 
-import java.util.Scanner;
 
 // Class to run the program
 public class Main {

@@ -68,7 +68,7 @@ public class PersistentStorage{
 	return combined;
     }
     
-    public int getProductPrice(String barcode) {
+    public int getSaleProductPrice(String barcode) {
         String query = "select unit_price from inventory where barcode = '"+barcode+"'";
 	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
         ArrayList<String> inner = new ArrayList<String>();
@@ -76,6 +76,39 @@ public class PersistentStorage{
         inner = outer.get(0);
 	return Integer.parseInt(inner.get(0));
     }
+    
+    public int getRentProductPrice(String barcode){
+        String query = "select RENTAL_PRICE from inventory where barcode = '"+barcode+"'";
+	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
+        ArrayList<String> inner = new ArrayList<String>();
+        outer = db.newQuery(query, 1);
+        inner = outer.get(0);
+	return Integer.parseInt(inner.get(0));
+    }
+    
+    //returns the rental information as in its tansaction_Id, Total_Price, and DUe_Date
+    public String getDueDate(String transactionID){
+        String query = "select DUE_DATE from  TRANSACTION where TRANSACTION_ID ='"+transactionID+"'";
+        ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
+	ArrayList<String> inner = new ArrayList<String>();
+	outer = db.newQuery(query, 3);
+	inner = outer.get(0);
+	outer = db.newQuery(query, 1);
+	inner = outer.get(0);
+	return inner.get(0);
+    }
+    
+    //returns transaction type
+    public String getTransactionType (String transactionId){
+        String query = "select TRANSACTION_TYPE from  TRANSACTION where TRANSACTION_ID ='"+transactionId+"'";
+        ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
+	ArrayList<String> inner = new ArrayList<String>();
+	outer = db.newQuery(query, 1);
+	inner = outer.get(0);
+	return inner.get(0);
+    }
+    
+    
     
     public boolean makePayment(String id, String type, double price, int quantity, String paymentType, String date, String due, String creditCardNum) {
         String query = "insert into transaction values('"+id+"','"+type+"',"+price+","+quantity+",'"+paymentType+"','"+date+"','"+due+"','"+creditCardNum+"')";
@@ -90,15 +123,26 @@ public class PersistentStorage{
         
     }
     
+    
+    
     public boolean returnItem(String barcode, int qty) {
         String query2 = "update inventory set quantity = quantity + "+qty+" where barcode = '"+barcode+"'";
         return db.newUpdateQuery(query2);
     }
+    
+    //used to show rental is done
+    public boolean zeroDueDate(String id){
+        String query2 = "update tansaction set DUE_DATE = '0' where TRANSACTION_ID = '"+id+"'";
+        return db.newUpdateQuery(query2);
+    }
+    
     
     public boolean removeFromCart(String barcode, int qty, int id) {
         returnItem(barcode, qty);
         String query2 = "delete from cart where TRANSACTION_ID = " + id;
         return db.newUpdateQuery(query2);
     }
+    
+    
 
 }

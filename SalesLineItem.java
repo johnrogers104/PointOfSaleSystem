@@ -1,6 +1,9 @@
 package ProcessSale;
 
 // Class to hold info for a product in the cart
+
+import static ProcessSale.TaxInterface.getTax;
+
 public class SalesLineItem {
     
     //variables
@@ -16,24 +19,22 @@ public class SalesLineItem {
       
     //method to get the subtotal of the purchase after adding this current item
     //to the sale
-    public int getSubtotal(){
-        //take in id of saleslineitem from productdescription and return the 
-        //price of that lineitem added to the current total
-        int price = desc.getPrice();
-        
-        //Adjust the price based on the number of the same items
-        int subTotal = price * quantity;
-        return subTotal;
+    public double getSubtotal(){
+        return getPrice() * quantity;
     }
     
-    // Get the price of the item
+    // Get the Sale price of the item
     public double getPrice() {
-        return desc.getPrice();
+        return desc.getSalePrice();
     }
     
-    public String toString() {
-        return "Barcode: " + getBarcode() + ", Qty: " + quantity + ", $" + desc.getPrice();
+   
+    @Override
+    public String toString(){
+        return "Barcode: " + getBarcode() + ", Qty: " + quantity + ", $" + (getSubtotal()+getTax(getSubtotal()));
     }
+    
+    
     
     public int getBarcode() {
         return desc.getBarcode();

@@ -62,16 +62,18 @@ public class RegisterController implements ActionListener {
                 System.out.println(exception.getMessage());
             }
         }
+        //this does not work
         else if (e.getActionCommand().equals("Return Item")) {
+           
             String id = JOptionPane.showInputDialog("Enter transaction ID");
             String barcode = JOptionPane.showInputDialog("Enter an item barcode");
             String qty = JOptionPane.showInputDialog("How many are you returning?");
             int intQty;
             try {
                 intQty = Integer.parseInt(qty);
-                register.returnItem(id, barcode, intQty);
+                register.returnItem(barcode, intQty);
             } catch (Exception exception) {
-                JOptionPane.showMessageDialog(null, "Error: Not an integer");
+                JOptionPane.showMessageDialog(null, "Error: No the correct input for a return");
                 System.out.println(exception.getMessage());
             }
         }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Collections;
 
 // Class to perform a sale
 public class Sale extends Observable {
@@ -62,6 +63,7 @@ public class Sale extends Observable {
         return total;
     }
     
+    
     // Cancell this current sale
     public void cancelSale() {
         // Remove all objects
@@ -69,9 +71,10 @@ public class Sale extends Observable {
         id = 0;
     }
     
-    // Return an item from a sale
-    public void returnItem(String id, String barcode, int quantity) {
+    // Return an item from a sale by adding to inventory
+    public void returnItem(String barcode, int quantity) {
         storage.returnItem(barcode, quantity);
     }
+    
     
 }

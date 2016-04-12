@@ -13,6 +13,7 @@ public class Payment {
     String transactionID;
     PersistentStorage storage;
     Sale finalSale;
+  
 
     // Constructor
     public Payment(Sale finalSale, String type, int id) {
@@ -56,11 +57,7 @@ public class Payment {
         return true;
     }
 
-    // Begin a rental with the payment put in and update the database
-    // May not need to implement
-    public boolean startRental() {
-        return finalizeRental();
-    }
+    
     
     // Upload the payment to the database
     public boolean finalizeRental() {
@@ -91,8 +88,4 @@ public class Payment {
         return true;
     }
 
-    // End the rental and update the database
-    public boolean endRental() {
-        return false;
-    }
 }

@@ -24,7 +24,7 @@ public class Register extends Observable {
         currentSale = sale;
     }
     
-    // Create a new Transaction
+    // Create a new sale Transaction
     public void makeNewSale() {
         currentSale = new Sale();
         setChanged();
@@ -32,7 +32,7 @@ public class Register extends Observable {
         clearChanged();
     }
     
-    // Create a new Transaction
+    // Create a new rental Transaction
     public void makeNewRental() {
         currentSale = new Rental();
         setChanged();
@@ -48,7 +48,7 @@ public class Register extends Observable {
         clearChanged();
     }
     
-    // Make a payment for the transaction and th
+    // Make a payment for the transaction 
     public void makePayment(String type) {
         if (currentSale != null) {
             currentSale.makePayment(type);
@@ -104,7 +104,7 @@ public class Register extends Observable {
     }
     
     // Return an item
-    public void returnItem(String id, String barcode, int quantity) {
-        currentSale.returnItem(id, barcode, quantity);
+    public void returnItem(String barcode, int quantity) {
+        currentSale.returnItem(barcode, quantity);
     }
 }
