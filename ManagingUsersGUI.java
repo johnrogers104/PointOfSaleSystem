@@ -7,9 +7,7 @@ import java.util.Observer;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.concurrent.TimeUnit;
+
 
 public class ManagingUsersGUI implements Observer {
     JFrame f;

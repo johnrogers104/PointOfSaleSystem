@@ -16,7 +16,6 @@ public class testSalesLineItem {
     SalesLineItem line;
     
     public testSalesLineItem(){
-  
     }
  
     @Test(expected = NullPointerException.class)
@@ -26,7 +25,7 @@ public class testSalesLineItem {
     
     @Test(expected = NullPointerException.class)
     public void testgetSubtotal(){
-        assertEquals("Calculating subtotal FAILED",line.getSubtotal(), (quantity*price));
+        assertEquals("Calculating subtotal FAILED",line.getSubtotal(), (desc.getSalePrice()*line.getQuantity()));
     }
  
 

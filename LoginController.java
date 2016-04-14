@@ -28,6 +28,7 @@ public class LoginController implements ActionListener {
     }
     
     // Override the action performed method
+    @Override
     public void actionPerformed(ActionEvent e) {
         // Perform different actions based on the event clicked
         if (e.getActionCommand().equals("Submit")) {

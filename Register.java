@@ -7,7 +7,7 @@ package ProcessSale;
 
 // Import statements
 import java.util.Observable;
-import java.util.Observer;
+
 
 // Class for the register of a cashier
 public class Register extends Observable {

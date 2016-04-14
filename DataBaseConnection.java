@@ -137,12 +137,7 @@ public class DataBaseConnection {
 	    String query = "select * from "+tableName+" where "+primaryKey+" = '"+str+"'";
 	    int c = rsmd.getColumnCount();
 	
-	    if(!newQuery(query, c).isEmpty()){
-		return true;
-	    }
-	    else{
-		return false;
-	    }
+            return !newQuery(query, c).isEmpty();
 	}
 	catch(SQLException ex){
 	    System.out.println("error in isInDataBase");
@@ -157,12 +152,7 @@ public class DataBaseConnection {
 	    ResultSetMetaData rsmd = r.getMetaData();
 	    int c = rsmd.getColumnCount();
 	    String query = "select * from "+tableName+" where "+columnName1+" = '"+attribute1+"' and "+columnName2+" = '"+attribute2+"'";
-	    if(!newQuery(query, c).isEmpty()){
-		return true;
-	    }
-	    else{
-		return false;
-	    }
+            return !newQuery(query, c).isEmpty();
 	}
 	catch(SQLException ex){
 	    System.out.println("error in verifyMatch");
