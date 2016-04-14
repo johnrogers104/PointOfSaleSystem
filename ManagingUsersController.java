@@ -29,14 +29,14 @@ public class ManagingUsersController implements ActionListener {
 	    users.addUser(id, name, role, password);
 	}
 	else if(ae.getActionCommand().equals("Fire Employee")){
-	    String id = JOptionPane.showInputDialog("Enter employee you wish to fire's ID");
+	    String id = JOptionPane.showInputDialog("Enter employee you wish to fire's password");
 	    users.deleteUser(id);
 	}
         else if(ae.getActionCommand().equals("Start Register")){
             users.startRegister();
 	}
 	else if(ae.getActionCommand().equals("Cancel")){
-	    
+	    System.exit(0);
         }
 
     }
