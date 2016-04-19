@@ -55,8 +55,6 @@ public class LoginNoGUI extends Observable {
     // Check if the user is a manager
     public boolean isManager() {
         String role = storage.getRole(employeeID).trim();
-        if (role.equalsIgnoreCase("manager"))
-            return true;
-        return false;
+        return role.equalsIgnoreCase("manager");
     }
 }  

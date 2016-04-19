@@ -27,10 +27,16 @@ public class RentLineItem extends SalesLineItem{
     public double getPrice(){
         return desc.getRentPrice();
     }
+    /*
+    public String getRentRules(){
+        return desc.getRentRules();
+    }*/
+    
+    
     
     @Override
     public String toString(){
-        return "Barcode: " + getBarcode() + ", Qty: " + quantity + ", $" + (getSubtotal()+getTax(getSubtotal()));
+        return "Barcode: " + getBarcode() + ", Qty: " + quantity + ", $" + getSubtotal();
     }
     
 }

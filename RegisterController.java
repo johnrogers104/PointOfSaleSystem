@@ -72,7 +72,7 @@ public class RegisterController implements ActionListener {
                     int intQty;
                     try {
                         intQty = Integer.parseInt(qty);
-                        register.returnItem(barcode, intQty);
+                        register.returnItem(id, barcode, intQty);
                     } catch (Exception exception) {
                         JOptionPane.showMessageDialog(null, "Error: No the correct input for a return");
                         System.out.println(exception.getMessage());

@@ -52,6 +52,7 @@ class RegisterGUI implements Observer {
     }
     
     // Update the GUI
+    @Override
     public void update(Observable subject, Object subjectChange) { 
         if (subjectChange.equals("Sale")) {
             notificationTF.setText("New Sale!");

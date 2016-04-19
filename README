@@ -1,4 +1,6 @@
 README file for the J-Tee's
 CSE216 POS System
 
+
+Rental Rules: set at 30 for all rentals which is why it is not displayed
 DataBaseConnection class: constructs a connection to our database and implements methods to access said DB, including a close() method to close the connection

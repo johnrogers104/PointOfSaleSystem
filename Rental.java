@@ -18,14 +18,13 @@ public class Rental extends Sale {
     
     // Constructor
     public Rental() { 
-
-        cart2 = new ArrayList<>();
+     cart2 = new ArrayList<>();
 
     }
     
     @Override
     public void makeItem(String barcode, int qty) {
-        cart.add(new RentLineItem(barcode, qty) );
+        cart2.add(new RentLineItem(barcode, qty) );
     }
     
  
@@ -43,12 +42,20 @@ public class Rental extends Sale {
         payment.finalizeRental();
       
         // Add items to the cart in the database
-        for (RentLineItem item: cart2) {
-            String barcode = Integer.toString(item.getBarcode());
+        cart2.stream().forEach((item) -> {
+            String barcode = Integer.toString(item.getBarcode());        
             storage.updateInventory(barcode, item.getQuantity(), id);
-        }
+        });
         return true; 
     }  
+   
+    @Override
+   public void returnItem(String transactionId, String barcode, int quantity) {
+        storage.returnItem(barcode, quantity);
+        storage.updateDueDate(transactionId);
+    }
+    
+    
     
     
   

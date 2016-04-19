@@ -104,7 +104,7 @@ public class Register extends Observable {
     }
     
     // Return an item
-    public void returnItem(String barcode, int quantity) {
-        currentSale.returnItem(barcode, quantity);
+    public void returnItem(String transactionID, String barcode, int quantity) {
+        currentSale.returnItem(transactionID, barcode, quantity);
     }
 }

@@ -54,6 +54,16 @@ public class PersistentStorage{
 	}
 	return combined;
     }
+    /*
+    public int getRentalDueDate(String){
+        String query = "select DUE_DATE from transaction where barcode = '"+barcode+"'" ;
+	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
+        ArrayList<String> inner = new ArrayList<String>();
+        outer = db.newQuery(query, 1);
+        inner = outer.get(0);
+	return Integer.parseInt(inner.get(0));
+                 
+    }*/
     
     public String getProductDesc(String barcode) {
         String query = "select name_of_product, quantity, color, size_of_shirt, unit_price from inventory where barcode = '"+barcode+"'";
@@ -123,7 +133,10 @@ public class PersistentStorage{
         
     }
     
-    
+    public boolean updateDueDate(String transactionID){
+        String query1 = "update transaction set DUE_DATE = '0' where transaction_ID = '"+transactionID+"'";
+        return db.newUpdateQuery(query1);
+    }
     
     public boolean returnItem(String barcode, int qty) {
         String query2 = "update inventory set quantity = quantity + "+qty+" where barcode = '"+barcode+"'";

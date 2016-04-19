@@ -31,7 +31,7 @@ public class SalesLineItem {
    
     @Override
     public String toString(){
-        return "Barcode: " + getBarcode() + ", Qty: " + quantity + ", $" + (getSubtotal()+getTax(getSubtotal()));
+        return "Barcode: " + getBarcode() + ", Qty: " + quantity + ", $" + getSubtotal();
     }
     
     

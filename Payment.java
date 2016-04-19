@@ -1,10 +1,17 @@
 package ProcessSale;
 
 // Class to make a payment for a sale
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class Payment {
 
@@ -13,6 +20,7 @@ public class Payment {
     String transactionID;
     PersistentStorage storage;
     Sale finalSale;
+    double totalSale;
   
 
     // Constructor
@@ -49,6 +57,7 @@ public class Payment {
                     totalPrice += item.getSubtotal();
                 }
                 storage.makePayment(transactionID, "Purch", totalPrice, totalQuantity, "Card", date, "null", type);
+                totalSale = totalPrice * TaxInterface.getTax(totalPrice);
             } catch (NumberFormatException e) {
                 System.out.println("Error: not a credit card number");
                 return false;
@@ -81,11 +90,22 @@ public class Payment {
                 totalPrice += item.getSubtotal();
             }
             storage.makePayment(transactionID, "Rental", totalPrice, totalQuantity, "Card", date, returnDate, type);
+            totalSale = totalPrice * TaxInterface.getTax(totalPrice);
         } catch (NumberFormatException e) {
             System.out.println("Error: not a credit card number");
             return false;
         }
         return true;
     }
+    
+    public void recipt() throws IOException{
+        List<String> lines;
+        Path file;
+        Path write;
+        lines = Arrays.asList("Subtotal: "+totalSale, "Tax: "+TaxInterface.getTax(totalSale));
+        file = Paths.get("recipt.txt");
+        write = Files.write(file, lines, Charset.forName("UTF-8"));
+      }
 
+    
 }

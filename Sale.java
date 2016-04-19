@@ -71,9 +71,11 @@ public class Sale extends Observable {
     }
     
     // Return an item from a sale by adding to inventory
-    public void returnItem(String barcode, int quantity) {
+    public void returnItem(String transactionID, String barcode, int quantity) {
         storage.returnItem(barcode, quantity);
     }
+
+  
     
     
 }
