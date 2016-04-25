@@ -5,7 +5,6 @@
  */
 package ProcessSale;
 
-import static ProcessSale.TaxInterface.getTax;
 
 /**
  *
@@ -27,6 +26,7 @@ public class RentLineItem extends SalesLineItem{
     public double getPrice(){
         return desc.getRentPrice();
     }
+    
     /*
     public String getRentRules(){
         return desc.getRentRules();
@@ -36,7 +36,8 @@ public class RentLineItem extends SalesLineItem{
     
     @Override
     public String toString(){
-        return "Barcode: " + getBarcode() + ", Qty: " + quantity + ", $" + getSubtotal();
+        return "Barcode: " + getBarcode() + ", Qty: " + quantity + ", $" + getSubtotal()
+                + "\nDescription:" + desc.getDescription();
     }
     
 }
