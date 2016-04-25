@@ -13,7 +13,7 @@ class RegisterGUI implements Observer {
     JFrame f;
     JPanel p;
     FlowLayout fl;
-    JTextField notificationTF;
+    JTextField notificationTF, subTotal, grandTotal;
     JTextArea itemsRentedTF;
     JButton createSale, createRental, pay, cancelSale, item, returnItem;
     
@@ -27,7 +27,9 @@ class RegisterGUI implements Observer {
         notificationTF.setPreferredSize( new Dimension( 150, 20 ) );
         itemsRentedTF = new JTextArea(10, 20);
         itemsRentedTF.setPreferredSize( new Dimension( 200, 100 ) );
-        
+	subTotal = new JTextField();
+	grandTotal = new JTextField();
+
         createSale = new JButton("New Sale");
         createRental = new JButton("New Rental");
         pay = new JButton("Pay");
@@ -44,6 +46,8 @@ class RegisterGUI implements Observer {
         p.add(cancelSale);
         p.add(item);
         p.add(returnItem);
+	p.add(subTotal);
+	p.add(grandTotal);
         
         f.setSize(400,400);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +82,9 @@ class RegisterGUI implements Observer {
             notificationTF.setText("Added An Item!"); 
             ArrayList items = (ArrayList) subjectChange;
             itemsRentedTF.append(items.size() + ":   " + items.get(items.size()-1).toString() + "\n");
+	    
         } 
+       
     }
 
     // Add a controller for this view
