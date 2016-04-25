@@ -41,6 +41,7 @@ public class RegisterController implements ActionListener {
                         register.makePayment(card);
                     } catch (Exception exception) {
                         register.makePayment("Cash");
+                  
                     }
                 } else {
                     register.makePayment("Cash");
@@ -53,12 +54,24 @@ public class RegisterController implements ActionListener {
                 break;
             case "Add Item":
                 {
+                    String quest = JOptionPane.showInputDialog("Rental (r) or Sale(s)?");
                     String barcode = JOptionPane.showInputDialog("Enter an item barcode");
                     String qty = JOptionPane.showInputDialog("How many?");
+                 
                     int intQty;
                     try {
                         intQty = Integer.parseInt(qty);
-                        register.enterItem(barcode, intQty);
+                        switch (quest) {
+                            case "s":
+                                register.enterItem(barcode, intQty, quest);
+                                break;
+                            case "r":
+                                register.enterItem(barcode,intQty, quest);
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null,"enter either r or s for rental or sale");
+                                break;
+                        }
                     } catch (Exception exception) {
                         JOptionPane.showMessageDialog(null, "Error: Not an integer");
                         System.out.println(exception.getMessage());

@@ -6,6 +6,11 @@
 package ProcessSale;
 
 // Import statements
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.Observable;
 
 
@@ -14,14 +19,15 @@ public class Register extends Observable {
     
     // Class variables
     Sale currentSale;
-    
+    Rental currentRental;
     // Constructor
     public Register() {
         
     }
     
-    public Register(Sale sale) {
+    public Register(Sale sale, Rental rental) {
         currentSale = sale;
+        currentRental = rental;
     }
     
     // Create a new sale Transaction
@@ -41,12 +47,20 @@ public class Register extends Observable {
     }
     
     // Enter an item into the sale
-    public void enterItem(String barcode, int quantity) {
+    public void enterItem(String barcode, int quantity, String quest) {
+        if(quest.equals("s")){
         currentSale.makeItem(barcode, quantity);
         setChanged();
         notifyObservers(currentSale.cart);
         clearChanged();
-    }
+        }
+        else{
+            currentRental.makeItem(barcode, quantity);
+            setChanged();
+            notifyObservers(currentRental.cart2);
+            clearChanged();
+        }
+        }
     
     // Make a payment for the transaction 
     public void makePayment(String type) {
@@ -56,11 +70,18 @@ public class Register extends Observable {
             setChanged();
             notifyObservers("Pay");
             clearChanged();
-        } else {
+        } else if (currentRental != null){
+            currentRental.makePayment(type);
+            endSale();
+            setChanged();
+            notifyObservers("Pay");
+            clearChanged();
+        }else{
             setChanged();
             notifyObservers("Can't Pay");
             clearChanged();
         }
+        
     }
     
     // Cancel a sale
@@ -95,16 +116,18 @@ public class Register extends Observable {
     // End a rental if the current sale is a rental
     public void endRental() {
         // Check if it is a rental
-        if (currentSale instanceof Rental) {
-            currentSale.becomeComplete();
-            currentSale = null;
-        } else {
-            System.out.println("Error: No current rental to end");
-        }
+            currentRental.becomeComplete();
+            currentRental = null;
     }
     
-    // Return an item
+    // Return a Sales item
     public void returnItem(String transactionID, String barcode, int quantity) {
         currentSale.returnItem(transactionID, barcode, quantity);
     }
+    
+    //Renturn a Rental item
+    public void returnRentalItem(String transactionID, String barcode, int quantity){
+        currentRental.returnItem(transactionID, barcode, quantity);
+    }
+    
 }

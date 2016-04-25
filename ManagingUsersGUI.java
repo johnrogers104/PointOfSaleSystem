@@ -44,7 +44,7 @@ public class ManagingUsersGUI implements Observer {
             f.setVisible(false);
             
 	    // Set up initial register GUI and its controller
-            Register reg = new Register(new Sale());
+            Register reg = new Register(new Sale(), new Rental());
             RegisterController regCont = new RegisterController();
 
             regCont.addRegister(reg);

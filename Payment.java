@@ -95,14 +95,15 @@ public class Payment {
             System.out.println("Error: not a credit card number");
             return false;
         }
-        return true;
+        return true; 
     }
     
     public void recipt() throws IOException{
         List<String> lines;
         Path file;
         Path write;
-        lines = Arrays.asList("Subtotal: "+totalSale, "Tax: "+TaxInterface.getTax(totalSale));
+        String newline = System.getProperty("line.separator");
+        lines = Arrays.asList("Subtotal: "+totalSale,newline, "Tax: "+TaxInterface.getTax(totalSale),newline);
         file = Paths.get("recipt.txt");
         write = Files.write(file, lines, Charset.forName("UTF-8"));
       }

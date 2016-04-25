@@ -16,7 +16,9 @@ class LoginGUI implements Observer {
     FlowLayout fl;
     JLabel welcomeTF;
     JButton submit;
-    JTextField username, password;
+    JTextField username;
+    JPasswordField password;
+    
     
     // Constructor to initially set up the GUI
     public LoginGUI() {
@@ -24,13 +26,14 @@ class LoginGUI implements Observer {
         p = new JPanel();
         fl = new FlowLayout(FlowLayout.CENTER);
         username = new JTextField(FlowLayout.CENTER);
-        password = new JTextField(FlowLayout.CENTER);
+        password = new JPasswordField(FlowLayout.CENTER);
         
         welcomeTF = new JLabel("Please Enter Your EmployeeID and Password: \n");
         welcomeTF.setPreferredSize( new Dimension( 350, 80 ) );
         
         username = new JTextField("EmployeeID");
-        password = new JTextField("Password");
+        
+        password = new JPasswordField("Password");
         submit = new JButton("Submit");
         
         username.setPreferredSize( new Dimension( 100, 20 ) );
@@ -46,7 +49,7 @@ class LoginGUI implements Observer {
         password.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
-                password.setText("");
+                password.setEchoChar('*');
             }
         });
         
@@ -101,7 +104,7 @@ class LoginGUI implements Observer {
                     
                 } else {
                     // Set up initial register GUI and its controller
-                    Register register = new Register(new Sale());
+                    Register register = new Register(new Sale(), new Rental());
                     RegisterController regCont = new RegisterController();
 
                     regCont.addRegister(register);

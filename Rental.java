@@ -9,17 +9,17 @@ import java.util.ArrayList;
 
 
 
-
 // Class to handle a rental
 public class Rental extends Sale {
-
+    
+    
     ArrayList<RentLineItem> cart2;
     
     
     // Constructor
     public Rental() { 
      cart2 = new ArrayList<>();
-
+     
     }
     
     @Override
@@ -55,13 +55,6 @@ public class Rental extends Sale {
         storage.updateDueDate(transactionId);
     }
     
-    
-    
-    
-  
-    
-    //adds to the inventroy the amount of rental being return and sets due date to 0 so know rental is over
-    //if there is a rental, 
     
   
 }

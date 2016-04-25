@@ -13,11 +13,9 @@ class RegisterGUI implements Observer {
     JFrame f;
     JPanel p;
     FlowLayout fl;
-    JTextField notificationTF, subTotalLabel, grandTotalLabel, subTotal, grandTotal;
+    JTextField notificationTF;
     JTextArea itemsRentedTF;
     JButton createSale, createRental, pay, cancelSale, item, returnItem;
-    private double subtotal = 0;
-    private double grandtotal = 0;
     
     // Constructor to initially set up the GUI
     public RegisterGUI() {
@@ -29,10 +27,6 @@ class RegisterGUI implements Observer {
         notificationTF.setPreferredSize( new Dimension( 150, 20 ) );
         itemsRentedTF = new JTextArea(10, 20);
         itemsRentedTF.setPreferredSize( new Dimension( 200, 100 ) );
-        subTotalLabel = new JTextField("Subtotal: ");
-        grandTotalLabel = new JTextField("Grand Total: ");
-	subTotal = new JTextField(5);
-	grandTotal = new JTextField(5);
         
         createSale = new JButton("New Sale");
         createRental = new JButton("New Rental");
@@ -50,11 +44,6 @@ class RegisterGUI implements Observer {
         p.add(cancelSale);
         p.add(item);
         p.add(returnItem);
-        p.add(subTotalLabel);
-        p.add(subTotal);
-        p.add(grandTotalLabel);
-	p.add(grandTotal);
-        
         
         f.setSize(400,400);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,8 +69,6 @@ class RegisterGUI implements Observer {
             notificationTF.setText("No Sale To Pay For!"); 
         } 
         else if (subjectChange.equals("Cancel Sale")) {
-            grandtotal = 0;
-            subtotal = 0;
             notificationTF.setText("Canceled The Sale"); 
         } 
         else if (subjectChange.equals("Can't Cancel")) {
@@ -91,27 +78,7 @@ class RegisterGUI implements Observer {
             notificationTF.setText("Added An Item!"); 
             ArrayList items = (ArrayList) subjectChange;
             itemsRentedTF.append(items.size() + ":   " + items.get(items.size()-1).toString() + "\n");
-	    
-            String[] tokens = (items.size() + ":   " + items.get(items.size()-1).toString()).split(" ");
-            String priceWDollar = tokens[tokens.length -1];
-            String price = "";
-            for(int i=0; i<priceWDollar.length(); i++){
-                if(priceWDollar.charAt(i) != '$'){
-                    price += priceWDollar.charAt(i);
-                }
-            }
-            double p = Double.parseDouble(price);
-            subtotal += p;
-            grandtotal = subtotal*1.07;
-            
-            String st = String.format("%.2f", subtotal);
-            String gt = String.format("%.2f", grandtotal);
-           
-            subTotal.setText(st);
-            grandTotal.setText(gt);
-            
         } 
-       
     }
 
     // Add a controller for this view
