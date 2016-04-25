@@ -33,7 +33,7 @@ class LoginGUI implements Observer {
         
         username = new JTextField("EmployeeID");
         
-        password = new JPasswordField("Password");
+        password = new JPasswordField("");
         submit = new JButton("Submit");
         
         username.setPreferredSize( new Dimension( 100, 20 ) );

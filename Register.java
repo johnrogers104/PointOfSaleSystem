@@ -40,7 +40,7 @@ public class Register extends Observable {
     
     // Create a new rental Transaction
     public void makeNewRental() {
-        currentSale = new Rental();
+        currentRental = new Rental();
         setChanged();
         notifyObservers("Rental");
         clearChanged();
@@ -115,7 +115,6 @@ public class Register extends Observable {
     
     // End a rental if the current sale is a rental
     public void endRental() {
-        // Check if it is a rental
             currentRental.becomeComplete();
             currentRental = null;
     }
