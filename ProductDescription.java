@@ -1,14 +1,21 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ProcessSale;
 
-// Class that contains info of a product
+/**
+ *
+ * @author Jane
+ */
 public class ProductDescription {
-    
     // Variables
     String description;
-    int salePrice; 
-    int rentPrice;
+    int price; 
     int barcode;
     PersistentStorage storage;
+    String productInfo;
     
     // Constructor
     public ProductDescription(String barcode) {
@@ -20,27 +27,25 @@ public class ProductDescription {
         storage = PersistentStorage.getInstance();
         if (storage.isInventory(barcode)) {
             description = storage.getProductDesc(barcode);
-            salePrice = storage.getSaleProductPrice(barcode);
-            rentPrice = storage.getRentProductPrice(barcode);
+            price = storage.getProductPrice(barcode);
+            productInfo = storage.getProductInfo(barcode);
         } else {
             description = "Error";
         }
     }
     
-    public int getSalePrice(){
-        return salePrice;
-    }
-    
-    public int getRentPrice(){
-        return rentPrice;
+    public int getPrice(){
+        return price;
     }
     
     public String getDescription() {
-        return description;
+     //productInfo = storage.getProductInfo(barcode);
+     return productInfo;
+    //return description;
     }
     
     public int getBarcode() {
         return barcode;
     }
-    
+
 }
