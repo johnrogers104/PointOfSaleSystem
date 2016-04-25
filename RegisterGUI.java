@@ -106,7 +106,7 @@ class RegisterGUI implements Observer {
             
             String st = String.format("%.2f", subtotal);
             String gt = String.format("%.2f", grandtotal);
-            System.out.println(st+"\n"+gt);
+           
             subTotal.setText(st);
             grandTotal.setText(gt);
             
