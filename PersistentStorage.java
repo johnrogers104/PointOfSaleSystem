@@ -152,10 +152,17 @@ public class PersistentStorage{
         return db.newUpdateQuery(query1);
     }
     
-    public boolean returnItem(String barcode, int qty) {
+    public boolean returnRentedItem(String barcode, int qty) {
         String query2 = "update inventory set quantity = quantity + "+qty+" where barcode = '"+barcode+"'";
         return db.newUpdateQuery(query2);
     }
+
+    public boolean returnSoldItem(String barcode, int qty) {
+        String query2 = "update rentedinventory set quantity = quantity + "+qty+" where barcode = '"+barcode+"'";
+        return db.newUpdateQuery(query2);
+    }
+
+
     
     //used to show rental is done
     public boolean zeroDueDate(String id){
