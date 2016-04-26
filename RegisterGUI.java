@@ -16,7 +16,9 @@ class RegisterGUI implements Observer {
     JTextField notificationTF, subTotalLabel, grandTotalLabel, subTotal, grandTotal;
     JTextArea itemsRentedTF;
     JButton createSale, createRental, pay, cancelSale, item, returnItem;
-    
+    private double subtotal = 0;
+    private double grandtotal = 0;
+
     // Constructor to initially set up the GUI
     public RegisterGUI() {
         f = new JFrame("Register GUI");
@@ -73,12 +75,18 @@ class RegisterGUI implements Observer {
         } 
         else if (subjectChange.equals("Pay")) {
             notificationTF.setText("Payment Successful!"); 
+	    grandtotal = 0;
+            subtotal = 0;
+	    subTotal.setText(Double.toString(subtotal));
+            grandTotal.setText(Double.toString(grandtotal));
         } 
         else if (subjectChange.equals("Can't Pay")) {
             notificationTF.setText("No Sale To Pay For!"); 
         } 
         else if (subjectChange.equals("Cancel Sale")) {
-            notificationTF.setText("Canceled The Sale"); 
+            notificationTF.setText("Canceled The Sale");
+	    grandtotal = 0;
+	    subtotal = 0;
         } 
         else if (subjectChange.equals("Can't Cancel")) {
             notificationTF.setText("No Sale To Cancel!"); 
