@@ -16,6 +16,8 @@ class RegisterGUI implements Observer {
     JTextField notificationTF, subTotalLabel, grandTotalLabel, subTotal, grandTotal;
     JTextArea itemsRentedTF;
     JButton createSale, createRental, pay, cancelSale, item, returnItem;
+    private double subtotal =0;
+    private double grandtotal =0;
     
     // Constructor to initially set up the GUI
     public RegisterGUI() {
