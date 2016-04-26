@@ -16,9 +16,10 @@ public class RegisterController implements ActionListener {
     // private class variables
     private Register register;
     private String quest;
-    
+    private PersistentStorage storage;
     // Constructor
     public RegisterController() {
+	storage = PersistentStorage.getInstance();
     }
     
     // Method to add a model to this class
@@ -58,6 +59,11 @@ public class RegisterController implements ActionListener {
             case "Add Item":
                 {
                     String barcode = JOptionPane.showInputDialog("Enter an item barcode");
+		    while(!storage.isInventory(barcode)){
+			JOptionPane.showMessageDialog(null, "This item is not in inventory!");
+			barcode = JOptionPane.showInputDialog("Enter an item\
+ barcode");
+		    }
                     String qty = JOptionPane.showInputDialog("How many?");
                  
                     int intQty;
