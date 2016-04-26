@@ -5,10 +5,17 @@ CSE216 POS System
 Welcome to the J-Tee's POS System. Here is a easy way to get through our application:
 
 Logging In:
-	When logging in, enter userID = '123456' and password = 'password123' to login as a normal cashier. To log in as a manager, try userID = '654321' and password = 'password321'.
-	If you log in as a cashier, you will be brought to the main Register. Here, you can perform all the transactions you wish, including new sale, new rental, and returning items.
-	If you log in as a manager, you will be brought to an interface that allows you to hire (create new) or fire (remove) employees. You can also select an option that will allow you to go the the register described above.
+	When logging in, enter userID = '123456' and password = 'password123' to login as a normal cashier. To log in as a manager, try 
+userID = '654321' and password = 'password321'.
+	If you log in as a cashier, you will be brought to the main Register. Here, you can perform all the transactions you wish, 
+including new sale, new rental, and returning items.
+	If you log in as a manager, you will be brought to an interface that allows you to hire (create new) or fire (remove) employees. 
+You can also select an option that will allow you to go the the register described above.
 
 Register:
-	Once you are at the register, click 'New Sale' to start. Then add item barcodes for the items you want to purchase (choose from 11111, 22222, 33333, or 44444) and the desired quantity. Click 'Pay' when you are ready to pay, and enter a credit card number, or leave blank for cash. This will complete the transaction and update our database accordingly, both inventory and transactions. 
-	There is also an option to return items from a transaction. Select 'Return Item' and enter the transaction ID from the receipt of the original purchase. Then enter the item barcodes you are returning and the quantity of each item you are returning. If you are returning a rental, these items will go back into a normal inventory table in our database. If you are returning a sale, the items will populate in a 'returned_inventory' table, and will not be available for sale again.
+	Once you are at the register, click 'New Sale' to start. Then add item barcodes for the items you want to purchase (choose from 
+11111, 22222, 33333, or 44444) and the desired quantity. Click 'Pay' when you are ready to pay, and enter a credit card number, or leave blank for cash. This will complete the transaction and update our database accordingly, both inventory and transactions. 
+	There is also an option to return items from a transaction. Select 'Return Item' and enter the transaction ID from 
+the receipt of the original purchase. Then enter the item barcodes you are returning and the quantity of each item you are 
+returning. If you are returning a rental, these items will go back into a normal inventory table in our database. If you are 
+returning a sale, the items will populate in a 'returned_inventory' table, and will not be available for sale again.
