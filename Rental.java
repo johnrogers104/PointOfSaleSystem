@@ -51,7 +51,7 @@ public class Rental extends Sale {
    
     @Override
    public void returnItem(String transactionId, String barcode, int quantity) {
-        storage.returnItem(barcode, quantity);
+        storage.returnRentedItem(barcode, quantity);
         storage.updateDueDate(transactionId);
     }
     

@@ -79,7 +79,7 @@ public class PersistentStorage{
     }
     
     public String getProductInfo(String barcode){
-        String query = "select name_of_product, color, size_of_shirt, from inventory where barcode = '"+barcode+"'";
+        String query = "select name_of_product, color, size_of_shirt from inventory where barcode = '"+barcode+"'";
 	ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
 	ArrayList<String> inner = new ArrayList<String>();
 	outer = db.newQuery(query, 3);
@@ -172,7 +172,7 @@ public class PersistentStorage{
     
     
     public boolean removeFromCart(String barcode, int qty, int id) {
-        returnItem(barcode, qty);
+        returnRentedItem(barcode, qty);
         String query2 = "delete from cart where TRANSACTION_ID = " + id;
         return db.newUpdateQuery(query2);
     }
