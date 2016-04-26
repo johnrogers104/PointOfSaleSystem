@@ -50,7 +50,7 @@ public class PersistentStorage{
 	inner = outer.get(0);
 	String combined = "";
 	for(int i=0; i<inner.size(); i++){
-	    combined += inner.get(i) + " ";
+	    combined += inner.get(i) + "";
 	}
 	return combined;
     }
@@ -73,7 +73,7 @@ public class PersistentStorage{
 	inner = outer.get(0);
 	String combined = "";
 	for(int i=0; i<inner.size(); i++){
-	    combined += inner.get(i) + " ";
+	    combined += inner.get(i) + "";
 	}
 	return combined;
     }
@@ -86,7 +86,7 @@ public class PersistentStorage{
 	inner = outer.get(0);
 	String combined = "";
 	for(int i=0; i<inner.size(); i++){
-	    combined += inner.get(i) + " ";
+	    combined += inner.get(i);
 	}
 	return combined;
     

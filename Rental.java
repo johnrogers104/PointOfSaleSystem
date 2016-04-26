@@ -43,7 +43,7 @@ public class Rental extends Sale {
       
         // Add items to the cart in the database
         cart2.stream().forEach((item) -> {
-            String barcode = Integer.toString(item.getBarcode());        
+            String barcode = item.getBarcode();        
             storage.updateInventory(barcode, item.getQuantity(), id);
         });
         return true; 

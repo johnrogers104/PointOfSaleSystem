@@ -2,8 +2,6 @@ package ProcessSale;
 
 // Class to hold info for a product in the cart
 
-import static ProcessSale.TaxInterface.getTax;
-
 public class SalesLineItem {
     
     //variables
@@ -36,7 +34,7 @@ public class SalesLineItem {
     
     
     
-    public int getBarcode() {
+    public String getBarcode() {
         return desc.getBarcode();
     }
     

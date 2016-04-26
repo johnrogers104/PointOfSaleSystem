@@ -91,6 +91,7 @@ public class Payment {
             }
             storage.makePayment(transactionID, "Rental", totalPrice, totalQuantity, "Card", date, returnDate, type);
             totalSale = totalPrice * TaxInterface.getTax(totalPrice);
+
         } catch (NumberFormatException e) {
             System.out.println("Error: not a credit card number");
             return false;

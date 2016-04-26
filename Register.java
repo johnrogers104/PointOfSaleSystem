@@ -54,11 +54,14 @@ public class Register extends Observable {
         notifyObservers(currentSale.cart);
         clearChanged();
         }
-        else{
+        else if (quest.equals("r")){
             currentRental.makeItem(barcode, quantity);
             setChanged();
             notifyObservers(currentRental.cart2);
             clearChanged();
+        }
+        else{
+            System.err.println("Quest isn't correct");
         }
         }
     

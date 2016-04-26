@@ -19,6 +19,7 @@ class RegisterGUI implements Observer {
     private double subtotal = 0;
     private double grandtotal = 0;
     
+    
     // Constructor to initially set up the GUI
     public RegisterGUI() {
         f = new JFrame("Register GUI");

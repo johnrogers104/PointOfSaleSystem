@@ -47,7 +47,7 @@ public class Sale extends Observable {
         
         // Add items to the cart in the database
         for (SalesLineItem item: cart) {
-            String barcode = Integer.toString(item.getBarcode());
+            String barcode = item.getBarcode();
             storage.updateInventory(barcode, item.getQuantity(), id);
         }
         return true;

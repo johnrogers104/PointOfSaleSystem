@@ -15,6 +15,7 @@ public class RegisterController implements ActionListener {
     
     // private class variables
     private Register register;
+    private String quest;
     
     // Constructor
     public RegisterController() {
@@ -31,6 +32,7 @@ public class RegisterController implements ActionListener {
         // Perform different actions based on the event clicked
         switch (e.getActionCommand()) {
             case "New Sale":
+                quest = "s";
                 register.makeNewSale();
                 break;
             case "Pay":
@@ -47,6 +49,7 @@ public class RegisterController implements ActionListener {
                     register.makePayment("Cash");
                 }   break;
             case "New Rental":
+                quest = "r";
                 register.makeNewRental();
                 break;
             case "Cancel Sale":
@@ -54,7 +57,6 @@ public class RegisterController implements ActionListener {
                 break;
             case "Add Item":
                 {
-                    String quest = JOptionPane.showInputDialog("Rental (r) or Sale(s)?");
                     String barcode = JOptionPane.showInputDialog("Enter an item barcode");
                     String qty = JOptionPane.showInputDialog("How many?");
                  
@@ -67,13 +69,14 @@ public class RegisterController implements ActionListener {
                                 break;
                             case "r":
                                 register.enterItem(barcode,intQty, quest);
+                                System.out.println("enterItem worked");
                                 break;
                             default:
                                 JOptionPane.showMessageDialog(null,"enter either r or s for rental or sale");
                                 break;
                         }
                     } catch (Exception exception) {
-                        JOptionPane.showMessageDialog(null, "Error: Not an integer");
+                        JOptionPane.showMessageDialog(null, "Error: In Register Controller)");
                         System.out.println(exception.getMessage());
                     }       break;
                 }

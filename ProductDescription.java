@@ -7,14 +7,14 @@ public class ProductDescription {
     String description;
     int salePrice; 
     int rentPrice;
-    int barcode;
+    String barcode;
     String productInfo;
     PersistentStorage storage;
     
     // Constructor
     public ProductDescription(String barcode) {
         try {
-            this.barcode = Integer.parseInt(barcode);
+            this.barcode = barcode;
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
@@ -41,7 +41,7 @@ public class ProductDescription {
         return productInfo;
     }
     
-    public int getBarcode() {
+    public String getBarcode() {
         return barcode;
     }
     
