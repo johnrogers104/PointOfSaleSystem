@@ -59,10 +59,9 @@ public class RegisterController implements ActionListener {
             case "Add Item":
                 {
                     String barcode = JOptionPane.showInputDialog("Enter an item barcode");
-		    while(!storage.isInventory(barcode)){
+		    while(storage.isInventory(barcode)){
 			JOptionPane.showMessageDialog(null, "This item is not in inventory!");
-			barcode = JOptionPane.showInputDialog("Enter an item\
- barcode");
+			barcode = JOptionPane.showInputDialog("Enter an item barcode");
 		    }
                     String qty = JOptionPane.showInputDialog("How many?");
                  
@@ -89,6 +88,12 @@ public class RegisterController implements ActionListener {
             case "Return Item":
                 {
                     String id = JOptionPane.showInputDialog("Enter transaction ID");
+                    
+                    // Error Checking
+                    while(storage.isTransaction(id)) {
+			JOptionPane.showMessageDialog(null, "Invalid Transaction ID!");
+			id = JOptionPane.showInputDialog("Enter a valid transaction ID");
+		    }
                     String barcode = JOptionPane.showInputDialog("Enter an item barcode");
                     String qty = JOptionPane.showInputDialog("How many are you returning?");
                     int intQty;

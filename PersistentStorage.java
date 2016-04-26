@@ -33,6 +33,10 @@ public class PersistentStorage{
     public boolean isInventory(String barcode){
 	return db.isInDataBase(barcode, "Inventory");
     }
+    
+    public boolean isTransaction(String transactionID){
+	return db.isInDataBase(transactionID, "transaction");
+    }
      
     public boolean checkPassword(String userID, String password){
 	return db.verifyMatch(userID, password, "Users", "employee_id", "passwords");
@@ -148,7 +152,7 @@ public class PersistentStorage{
     }
     
     public boolean updateDueDate(String transactionID){
-        String query1 = "update transaction set DUE_DATE = '0' where transaction_ID = '"+transactionID+"'";
+        String query1 = "update transaction set DUE_DATE = '1' where transaction_ID = '"+transactionID+"'";
         return db.newUpdateQuery(query1);
     }
     
@@ -157,19 +161,10 @@ public class PersistentStorage{
         return db.newUpdateQuery(query2);
     }
 
-    public boolean returnSoldItem(String barcode, int qty) {
-        String query2 = "update rentedinventory set quantity = quantity + "+qty+" where barcode = '"+barcode+"'";
+    public boolean returnSoldItem(String transactionID, String barcode, int qty) {
+        String query2 = "insert into returnedinventory values (" + barcode + "," + qty + "," + transactionID + ")";
         return db.newUpdateQuery(query2);
-    }
-
-
-    
-    //used to show rental is done
-    public boolean zeroDueDate(String id){
-        String query2 = "update tansaction set DUE_DATE = '0' where TRANSACTION_ID = '"+id+"'";
-        return db.newUpdateQuery(query2);
-    }
-    
+    }    
     
     public boolean removeFromCart(String barcode, int qty, int id) {
         returnRentedItem(barcode, qty);
