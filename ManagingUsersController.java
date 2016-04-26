@@ -20,17 +20,10 @@ public class ManagingUsersController implements ActionListener {
 
     public void actionPerformed(ActionEvent ae){
 	if(ae.getActionCommand().equals("Add Employee")){
-	    String name = JOptionPane.showInputDialog("Enter employee's name");
-	    String role = JOptionPane.showInputDialog("Enter employee's role (employee or manager)");
-	    String password = JOptionPane.showInputDialog("Enter employees password");
-	    Random rnd = new Random();
-	    int intID = 10000 + rnd.nextInt(90000);
-	    String id = Integer.toString(intID);
-	    users.addUser(id, name, role, password);
+	    EmployeeForm empForm = new EmployeeForm(users);
 	}
 	else if(ae.getActionCommand().equals("Fire Employee")){
-	    String id = JOptionPane.showInputDialog("Enter employee you wish to fire's password");
-	    users.deleteUser(id);
+	    EmployeeFireForm fireForm = new EmployeeFireForm(users);
 	}
         else if(ae.getActionCommand().equals("Start Register")){
             users.startRegister();
