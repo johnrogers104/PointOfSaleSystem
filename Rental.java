@@ -38,9 +38,8 @@ public class Rental extends Sale {
             System.out.println("Error: not a credit card number");
             return false;
         }
-        Payment payment = new Payment(this, type, id);
+        Payment payment = new Payment(this,this, type, id);
         payment.finalizeRental();
-      
         // Add items to the cart in the database
         cart2.stream().forEach((item) -> {
             String barcode = item.getBarcode();        

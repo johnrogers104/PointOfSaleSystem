@@ -6,7 +6,14 @@ import java.util.Observer;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // GUI interface for the rental class
 class RegisterGUI implements Observer {
@@ -29,7 +36,7 @@ class RegisterGUI implements Observer {
         notificationTF = new JTextField("Register: \n");
         notificationTF.setPreferredSize( new Dimension( 150, 20 ) );
         itemsRentedTF = new JTextArea(10, 20);
-        itemsRentedTF.setPreferredSize( new Dimension( 200, 100 ) );
+        itemsRentedTF.setPreferredSize( new Dimension( 400, 300) );
 	subTotalLabel = new JTextField("Subtotal: ");
         grandTotalLabel = new JTextField("Grand Total: ");
 	subTotal = new JTextField(5);
@@ -57,7 +64,7 @@ class RegisterGUI implements Observer {
         p.add(grandTotalLabel);
 	p.add(grandTotal);
         
-        f.setSize(400,400);
+        f.setSize(600,800);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setContentPane(p);
         f.setVisible(true);
@@ -80,6 +87,17 @@ class RegisterGUI implements Observer {
             subtotal = 0;
 	    subTotal.setText(Double.toString(subtotal));
             grandTotal.setText(Double.toString(grandtotal));
+            BufferedReader buffReader = null;
+            try{
+                File file = new File("receipt.txt");
+                FileReader fileReader = new FileReader(file);
+                buffReader = new BufferedReader(fileReader);
+                itemsRentedTF.read(buffReader, "receipt.txt");
+                fileReader.close();
+            } catch (IOException ex) {
+                Logger.getLogger(RegisterGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         } 
         else if (subjectChange.equals("Can't Pay")) {
             notificationTF.setText("No Sale To Pay For!"); 

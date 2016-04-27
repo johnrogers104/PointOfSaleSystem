@@ -67,7 +67,7 @@ public class Register extends Observable {
     
     // Make a payment for the transaction 
     public void makePayment(String type) {
-        if (currentSale != null) {
+        if (currentSale != null && currentRental == null) {
             currentSale.makePayment(type);
             endSale();
             setChanged();

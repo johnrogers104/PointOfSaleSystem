@@ -1,0 +1,6 @@
+Barcode: 22222, Qty: 1, $15.0
+Transaction Number: 139
+Subtotal: 15.0
+Tax: 1.05
+------------------
+TOTAL: 16.05

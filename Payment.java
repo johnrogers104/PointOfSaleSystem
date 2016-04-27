@@ -2,16 +2,13 @@ package ProcessSale;
 
 // Class to make a payment for a sale
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Payment {
 
@@ -20,49 +17,65 @@ public class Payment {
     String transactionID;
     PersistentStorage storage;
     Sale finalSale;
-    double totalSale;
+    Rental finalRental;
+
+    
   
 
     // Constructor
-    public Payment(Sale finalSale, String type, int id) {
+    public Payment(Sale finalSale, Rental finalRental, String type, int id) {
         this.type = type;
         transactionID = Integer.toString(id);
         this.finalSale = finalSale;
+        this.finalRental = finalRental;
         storage = PersistentStorage.getInstance();
     }
 
     // Upload the payment to the database
     public boolean finalizePayment() {
-
         // Variables used
         DateFormat formatter = new SimpleDateFormat("ddMMyyyy");
         String date = formatter.format(finalSale.time);
-
+        int totalQuantity = 0;
+        double totalPrice = 0.00;
+        double totalSale;
+        double tax;
+        String newline = System.getProperty("line.separator");
+        String cart = "";
+        String quest = "";
+        String returnDate="";
+        
         // Check the type of payment
         if (type.equalsIgnoreCase("cash")) {
-            int totalQuantity = 0;
-            double totalPrice = 0;
             for (SalesLineItem item : finalSale.cart) {
                 totalQuantity += item.getQuantity();
                 totalPrice += item.getSubtotal();
+                cart += item.toString() + newline;
             }
-            storage.makePayment(transactionID, "Purch", totalPrice, totalQuantity, "Cash", date, "null", "null");
-        } else {
-            try {
+            tax=TaxInterface.getTax(totalPrice);
+            totalSale = totalPrice + tax;
+            storage.makePayment(transactionID, "Purch", totalSale, totalQuantity, "Cash", date, "null", "null");    
+            } else {
+                 try {
                 Integer.parseInt(type);
-                int totalQuantity = 0;
-                double totalPrice = 0;
                 for (SalesLineItem item : finalSale.cart) {
                     totalQuantity += item.getQuantity();
                     totalPrice += item.getSubtotal();
-                }
-                storage.makePayment(transactionID, "Purch", totalPrice, totalQuantity, "Card", date, "null", type);
-                totalSale = totalPrice * TaxInterface.getTax(totalPrice);
-            } catch (NumberFormatException e) {
+                    cart += item.toString() + newline;
+                      }
+                tax=Math.floor(TaxInterface.getTax(totalPrice) *100)/100;
+                totalSale = tax + totalPrice;
+                storage.makePayment(transactionID, "Purch", totalSale, totalQuantity, "Card", date, "null", type);
+                } catch (NumberFormatException e) {
                 System.out.println("Error: not a credit card number");
                 return false;
-            }
-        }
+                }
+              }
+            try {
+                    receipt(cart,totalPrice,totalSale,tax,quest,returnDate);
+                  } catch (IOException ex) {
+                   Logger.getLogger(Payment.class.getName()).log(Level.SEVERE, null, ex);
+                  } 
         return true;
     }
 
@@ -70,44 +83,74 @@ public class Payment {
     
     // Upload the payment to the database
     public boolean finalizeRental() {
-        
         // Variables used
         DateFormat formatter = new SimpleDateFormat("ddMMyyyy");
-        Date dt = finalSale.time;
+        Date dt = finalRental.time;
         String date = formatter.format(dt);
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
         c.add(Calendar.DATE, 30);
         dt = c.getTime();
         String returnDate = formatter.format(dt);
+        String newline = System.getProperty("line.separator");
+        String cart = "";
+        int totalQuantity = 0;
+        double totalSale;
+        double tax;
+        double totalPrice = 0.00;
+        String quest ="r";
+        
         
         try {
             Integer.parseInt(type);
-            int totalQuantity = 0;
-            double totalPrice = 0;
-            for (SalesLineItem item : finalSale.cart) {
+            for (RentLineItem item : finalRental.cart2) {
                 totalQuantity += item.getQuantity();
                 totalPrice += item.getSubtotal();
+                cart += item.toString()+newline;
             }
             storage.makePayment(transactionID, "Rental", totalPrice, totalQuantity, "Card", date, returnDate, type);
-            totalSale = totalPrice * TaxInterface.getTax(totalPrice);
-
+            tax=Math.floor(TaxInterface.getTax(totalPrice) *100)/100;
+            totalSale = totalPrice + TaxInterface.getTax(totalPrice);
         } catch (NumberFormatException e) {
             System.out.println("Error: not a credit card number");
             return false;
         }
+        try {
+                receipt(cart,totalPrice,totalSale,tax,quest,returnDate);
+            } catch (IOException ex) {
+                Logger.getLogger(Payment.class.getName()).log(Level.SEVERE, null, ex);
+            }
         return true; 
     }
     
-    public void recipt() throws IOException{
-        List<String> lines;
-        Path file;
-        Path write;
-        String newline = System.getProperty("line.separator");
-        lines = Arrays.asList("Subtotal: "+totalSale,newline, "Tax: "+TaxInterface.getTax(totalSale),newline);
-        file = Paths.get("recipt.txt");
-        write = Files.write(file, lines, Charset.forName("UTF-8"));
+    public void receipt(String cart, double totalPrice, double totalSale, double tax, String quest,String returnDate) throws IOException{ 
+           PrintWriter writer = new PrintWriter("receipt.txt", "UTF-8");
+        
+            writer.println("Transaction Number: "+transactionID);
+            writer.println("");
+            writer.printf(cart);
+            writer.println("");
+            writer.println("-----------------------");
+            writer.println("Subtotal: $"+totalPrice);
+           
+            writer.println("Tax: $"+tax);
+            writer.println("-----------------------");
+            writer.println("TOTAL: $"+totalSale);
+             if(quest.equals("r")){
+                 String day = returnDate.substring(0,2);
+                 String month = returnDate.substring(2,4);
+                 String year = returnDate.substring(4,8);
+                 String returnForm = month+"/"+day+"/"+year;
+                 writer.println("");
+                 writer.println("RENTAL RULES:");
+                 writer.println("THE RENTAL NEEDS TO BE RETURNED WITHIN 30 DAYS");
+                 writer.println("OF THE INITIAL TRANSACTION TO BE CONSIDERED ON TIME");
+                 writer.println("THE DUE DATE WILL BE: " + returnForm);
+            }
+            
+            writer.close();
+          } 
       }
 
     
-}
+

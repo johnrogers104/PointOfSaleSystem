@@ -42,7 +42,8 @@ public class Sale extends Observable {
     
     // Make a payment for this sale. Only 1 per sale
     public boolean makePayment(String type) {
-        Payment payment = new Payment(this, type, id);
+        Payment payment = new Payment(this,null, type, id);
+        
         payment.finalizePayment();
         
         // Add items to the cart in the database
