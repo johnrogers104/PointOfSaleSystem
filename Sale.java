@@ -42,7 +42,8 @@ public class Sale extends Observable {
     
     // Make a payment for this sale. Only 1 per sale
     public boolean makePayment(String type) {
-        Payment payment = new Payment(this, type, id);
+        Payment payment = new Payment(this,null, type, id);
+        
         payment.finalizePayment();
         
         // Add items to the cart in the database
@@ -70,9 +71,12 @@ public class Sale extends Observable {
         id = 0;
     }
     
-    // Return an item from a sale by adding to inventory
+    // Return an item from a sale by adding to new table for inventory
     public void returnItem(String transactionID, String barcode, int quantity) {
-        storage.returnSoldItem(transactionID, barcode, quantity);  
+        storage.returnSoldItem(transactionID, barcode, quantity);
     }
+
+  
+    
     
 }
