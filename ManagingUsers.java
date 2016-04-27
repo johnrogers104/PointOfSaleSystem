@@ -33,8 +33,8 @@ public class ManagingUsers extends Observable {
       db.newUpdateQuery(query);    
     }
 
-    public void deleteUser(String password) {
-        String query = "delete from users where passwords = '" + password + "'";
+    public void deleteUser(String id) {
+        String query = "delete from users where employee_id = '" + id + "'";
         db.newUpdateQuery(query);
     }
     
