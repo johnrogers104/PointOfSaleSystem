@@ -45,9 +45,8 @@ public class RegisterController implements ActionListener {
                         register.makePayment(card);
                     } catch (Exception exception) {
                         register.makePayment("Cash");
-                  
                     }
-                }else if(register.currentRental !=null){
+                }else if(register.currentSale != null && register.currentRental !=null){
                     String card = JOptionPane.showInputDialog("Enter a card number 8 digits long");
                     try {
                         Integer.parseInt(card);
@@ -103,6 +102,7 @@ public class RegisterController implements ActionListener {
                     try {
                         intQty = Integer.parseInt(qty);
                         register.returnItem(id, barcode, intQty);
+                        System.out.println("return working");
                       }catch (Exception exception) {
                         JOptionPane.showMessageDialog(null, "Error: No the correct input for a return");
                         System.out.println(exception.getMessage());

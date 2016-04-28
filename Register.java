@@ -33,6 +33,7 @@ public class Register extends Observable {
     // Create a new sale Transaction
     public void makeNewSale() {
         currentSale = new Sale();
+        currentRental = null;
         setChanged();
         notifyObservers("Sale");
         clearChanged();
@@ -40,6 +41,7 @@ public class Register extends Observable {
     
     // Create a new rental Transaction
     public void makeNewRental() {
+        currentSale = new Sale();
         currentRental = new Rental();
         setChanged();
         notifyObservers("Rental");
